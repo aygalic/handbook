@@ -3,7 +3,7 @@
 1. [Descriptive Statistics](./1_descriptive_statistics/)
 2. [Probability Distributions](./2_probability_distributions/)
 3. [Statistical Inference](./3_statistical_inference/)
-4. [Regression Analysis]()
+4. [Regression Analysis](./4_regression_analysis/)
 5. [Experimental Design]()
 6. [Bayesian Statistics]()
 7. [Advanced Topics]()
@@ -16,28 +16,8 @@
 ## [Interview Tips](./interview-tips.md)
 
 
-## 3. Statistical Inference
 
 
-
-
-## 4. Regression Analysis
-- **Simple Linear Regression**
-  - Assumptions
-  - Least Squares estimation
-  - R-squared and adjusted R-squared
-  - Residual analysis
-
-- **Multiple Linear Regression**
-  - Multicollinearity
-  - Feature selection
-  - Interaction terms
-  - Polynomial regression
-
-- **Generalized Linear Models**
-  - Logistic regression
-  - Poisson regression
-  - Link functions
 
 ## 5. Experimental Design
 - **Basic Principles**

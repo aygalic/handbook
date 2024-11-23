@@ -1,0 +1,4 @@
+- **Generalized Linear Models**
+  - Logistic regression
+  - Poisson regression
+  - Link functions
