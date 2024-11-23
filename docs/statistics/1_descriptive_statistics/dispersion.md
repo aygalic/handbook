@@ -1,0 +1,5 @@
+- **Measures of Dispersion**
+  - Variance and Standard Deviation
+  - Range and Interquartile Range (IQR)
+  - Coefficient of Variation
+  - Mean Absolute Deviation

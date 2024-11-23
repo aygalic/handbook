@@ -1,0 +1,4 @@
+- **Distribution Characteristics**
+  - Skewness: Left vs right-skewed distributions
+  - Kurtosis: Heavy vs light tails
+  - Moments of a distribution

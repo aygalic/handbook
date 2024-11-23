@@ -1,0 +1,5 @@
+- **Measures of Central Tendency**
+  - Mean: Arithmetic, geometric, harmonic means and their use cases
+  - Median: Robustness to outliers
+  - Mode: Use in categorical data
+  - Relationship between mean, median, mode in skewed distributions
