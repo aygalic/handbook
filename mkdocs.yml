@@ -52,4 +52,4 @@ extra_javascript:
 plugins:
   - search
   - include-markdown:
-        preserve_includer_indent: true
+      preserve_includer_indent: true
