@@ -1,0 +1,5 @@
+- **Basic Principles**
+  - Randomization
+  - Replication
+  - Blocking
+  - Factorial designs

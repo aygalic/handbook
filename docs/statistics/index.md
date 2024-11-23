@@ -4,7 +4,7 @@
 2. [Probability Distributions](./2_probability_distributions/)
 3. [Statistical Inference](./3_statistical_inference/)
 4. [Regression Analysis](./4_regression_analysis/)
-5. [Experimental Design]()
+5. [Experimental Design](./5_experimental_design/)
 6. [Bayesian Statistics]()
 7. [Advanced Topics]()
 
@@ -15,22 +15,6 @@
 
 ## [Interview Tips](./interview-tips.md)
 
-
-
-
-
-## 5. Experimental Design
-- **Basic Principles**
-  - Randomization
-  - Replication
-  - Blocking
-  - Factorial designs
-
-- **A/B Testing**
-  - Sample size determination
-  - Statistical significance
-  - Effect size
-  - Multiple testing corrections
 
 ## 6. Bayesian Statistics
 - **Fundamentals**
