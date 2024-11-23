@@ -53,3 +53,4 @@ extra_javascript:
 
 plugins:
   - search
+  - include-markdown
