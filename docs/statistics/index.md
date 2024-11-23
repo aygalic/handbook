@@ -1,18 +1,13 @@
 # Core Statistical Concepts for Data Science Interviews
 
-
-# Statistical Concepts for Data Science Interviews
-
-## Table of Contents
-
 1. [Descriptive Statistics](./1_descriptive_statistics/)
-   - [Measures of Central Tendency](./1_descriptive_statistics/central-tendency.md)
-   - [Measures of Dispersion](./1_descriptive_statistics/dispersion.md)
-   - [Distribution Characteristics](./1_descriptive_statistics/distribution-characteristics.md)
-
-2. [Probability Distributions](./2-probability-distributions/)
-   - [Discrete Distributions](./2-probability-distributions/discrete.md)
-   - [Continuous Distributions](./2-probability-distributions/continuous.md)
+2. [Probability Distributions](./2_probability_distributions/)
+3. [Statistical Inference]()
+4. [Regression Analysis]()
+5. [Experimental Design]()
+6. [Time Series Analysis]()
+7. [Bayesian Statistics]()
+8. [Advanced Topics]()
 
 ## Common Interview Questions
 - [When to use t-test vs z-test](./common-questions/t-test-vs-z-test.md)

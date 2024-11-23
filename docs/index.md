@@ -6,6 +6,6 @@ Main area of interest:
 
 - Linear Algebra
 - Machine Learning
-- Statistics
+- [Statistics](./statistics/)
 - Probability
 - Coding practices
