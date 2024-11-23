@@ -1,0 +1,6 @@
+- **Hypothesis Testing**
+  - Null and Alternative hypotheses
+  - Type I and Type II errors
+  - p-values and significance levels
+  - Statistical power
+  - Multiple testing problem

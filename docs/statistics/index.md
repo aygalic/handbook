@@ -2,12 +2,11 @@
 
 1. [Descriptive Statistics](./1_descriptive_statistics/)
 2. [Probability Distributions](./2_probability_distributions/)
-3. [Statistical Inference]()
+3. [Statistical Inference](./3_statistical_inference/)
 4. [Regression Analysis]()
 5. [Experimental Design]()
-6. [Time Series Analysis]()
-7. [Bayesian Statistics]()
-8. [Advanced Topics]()
+6. [Bayesian Statistics]()
+7. [Advanced Topics]()
 
 ## Common Interview Questions
 - [When to use t-test vs z-test](./common-questions/t-test-vs-z-test.md)
@@ -17,41 +16,10 @@
 ## [Interview Tips](./interview-tips.md)
 
 
-## 2. Probability Distributions
-- **Discrete Distributions**
-  - Bernoulli and Binomial
-  - Poisson (rare events)
-  - Geometric and Negative Binomial
-  - Hypergeometric
-
-- **Continuous Distributions**
-  - Normal/Gaussian
-  - Student's t-distribution
-  - Chi-square distribution
-  - F-distribution
-  - Exponential and Gamma
-  - Beta distribution
-
 ## 3. Statistical Inference
-- **Sampling Theory**
-  - Population vs Sample
-  - Sampling distributions
-  - Central Limit Theorem
-  - Law of Large Numbers
-  - Standard Error
 
-- **Estimation**
-  - Point estimates
-  - Confidence intervals
-  - Maximum Likelihood Estimation (MLE)
-  - Bias-Variance tradeoff
 
-- **Hypothesis Testing**
-  - Null and Alternative hypotheses
-  - Type I and Type II errors
-  - p-values and significance levels
-  - Statistical power
-  - Multiple testing problem
+
 
 ## 4. Regression Analysis
 - **Simple Linear Regression**
@@ -84,20 +52,7 @@
   - Effect size
   - Multiple testing corrections
 
-## 6. Time Series Analysis
-- **Components**
-  - Trend
-  - Seasonality
-  - Cyclical patterns
-  - Random variation
-
-- **Methods**
-  - Moving averages
-  - Exponential smoothing
-  - ARIMA models
-  - Stationarity
-
-## 7. Bayesian Statistics
+## 6. Bayesian Statistics
 - **Fundamentals**
   - Bayes' Theorem
   - Prior and posterior distributions
@@ -109,7 +64,7 @@
   - Bayesian regression
   - Hierarchical models
 
-## 8. Advanced Topics
+## 7. Advanced Topics
 - **Dimensionality Reduction**
   - Principal Component Analysis (PCA)
   - Factor Analysis

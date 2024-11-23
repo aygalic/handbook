@@ -1,0 +1,6 @@
+- **Sampling Theory**
+  - Population vs Sample
+  - Sampling distributions
+  - Central Limit Theorem
+  - Law of Large Numbers
+  - Standard Error
