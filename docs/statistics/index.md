@@ -1,38 +1,5 @@
 # Core Statistical Concepts for Data Science Interviews
 
-1. [Descriptive Statistics](./1_descriptive_statistics/)
-2. [Probability Distributions](./2_probability_distributions/)
-3. [Statistical Inference](./3_statistical_inference/)
-4. [Regression Analysis](./4_regression_analysis/)
-5. [Experimental Design](./5_experimental_design/)
-6. [Bayesian Statistics](./6_bayesian_statistics/)
-7. [Advanced Topics]()
-
-## Common Interview Questions
-- [When to use t-test vs z-test](./common-questions/t-test-vs-z-test.md)
-- [Handling Missing Data](./common-questions/missing-data.md)
-- [Correlation vs Causation](./common-questions/correlation-causation.md)
-
-## [Interview Tips](./interview-tips.md)
-
-
-## 7. Advanced Topics
-- **Dimensionality Reduction**
-  - Principal Component Analysis (PCA)
-  - Factor Analysis
-  - t-SNE
-
-
-## Interview Tips
-- Always start with the simplest explanation
-- Be prepared to explain assumptions behind methods
-- Know when to use which test/method
-- Be able to explain limitations and alternatives
-- Practice explaining technical concepts to non-technical audiences
-- Be ready to discuss real-world applications
-
-
-
 ## Common Interview Questions
 <details>
 <summary>1. When would you use a t-test vs z-test?</summary>
