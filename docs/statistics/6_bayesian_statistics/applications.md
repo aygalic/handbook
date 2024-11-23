@@ -1,0 +1,4 @@
+- **Applications**
+  - Bayesian A/B testing
+  - Bayesian regression
+  - Hierarchical models

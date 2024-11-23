@@ -5,7 +5,7 @@
 3. [Statistical Inference](./3_statistical_inference/)
 4. [Regression Analysis](./4_regression_analysis/)
 5. [Experimental Design](./5_experimental_design/)
-6. [Bayesian Statistics]()
+6. [Bayesian Statistics](./6_bayesian_statistics/)
 7. [Advanced Topics]()
 
 ## Common Interview Questions
@@ -16,34 +16,12 @@
 ## [Interview Tips](./interview-tips.md)
 
 
-## 6. Bayesian Statistics
-- **Fundamentals**
-  - Bayes' Theorem
-  - Prior and posterior distributions
-  - Conjugate priors
-  - Bayesian inference
-
-- **Applications**
-  - Bayesian A/B testing
-  - Bayesian regression
-  - Hierarchical models
-
 ## 7. Advanced Topics
 - **Dimensionality Reduction**
   - Principal Component Analysis (PCA)
   - Factor Analysis
   - t-SNE
 
-- **Non-parametric Statistics**
-  - Kernel Density Estimation
-  - Spearman correlation
-  - Mann-Whitney U test
-  - Kruskal-Wallis test
-
-- **Survival Analysis**
-  - Censoring
-  - Kaplan-Meier estimates
-  - Cox proportional hazards
 
 ## Interview Tips
 - Always start with the simplest explanation
