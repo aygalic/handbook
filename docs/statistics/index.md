@@ -1,132 +1,130 @@
 # Core Statistical Concepts for Data Science Interviews
 
 ## Common Interview Questions
-<details>
-<summary>1. When would you use a t-test vs z-test?</summary>
-<br>
-Let me break down the key differences between t-tests and z-tests and explain when to use each one:
 
-Key Distinctions:
+??? "When would you use a t-test vs z-test?"
 
-1. Population Standard Deviation
-- Z-test: Used when we KNOW the population standard deviation (σ)
-- T-test: Used when we DON'T know the population standard deviation and must estimate it using sample standard deviation (s)
+    Let me break down the key differences between t-tests and z-tests and explain when to use each one:
 
-2. Sample Size
-- Z-test: Generally used for large samples (n > 30)
-- T-test: Better for small samples (n < 30) because it accounts for the extra uncertainty in estimating the standard deviation
+    ### Key Distinctions
 
-3. Distribution
-- Z-test: Assumes data follows a normal distribution
-- T-test: Uses Student's t-distribution, which has heavier tails than normal distribution to account for additional uncertainty
+    1. Population Standard Deviation
+        - Z-test: Used when we KNOW the population standard deviation (σ)
+        - T-test: Used when we DON'T know the population standard deviation and must estimate it using sample standard deviation (s)
 
-Here's a practical example:
+    2. Sample Size
+        - Z-test: Generally used for large samples (n > 30)
+        - T-test: Better for small samples (n < 30) because it accounts for extra uncertainty in estimating the standard deviation
 
-Scenario 1: Quality Control in Large Manufacturing Plant
-- Testing widget weights
-- Years of historical data available
-- Known population standard deviation
-- Large daily samples
-→ Use Z-test because you know σ and have large samples
+    3. Distribution
+        - Z-test: Assumes data follows a normal distribution
+        - T-test: Uses Student's t-distribution, which has heavier tails than normal distribution to account for additional uncertainty
 
-Scenario 2: Medical Research Study
-- Testing new drug effectiveness
-- Small patient group (n=20)
-- No known population standard deviation
-- Need to estimate variance from sample
-→ Use T-test because of small sample size and unknown σ
+    ### Practical Examples
 
-Common Interview Follow-up Questions:
-1. Why does the t-distribution have heavier tails than normal distribution?
-   - Because it accounts for the additional uncertainty in estimating the standard deviation
-   
-### Heavier Tails of T-Distribution
+    **Scenario 1: Quality Control in Large Manufacturing Plant**
+    - Testing widget weights
+    - Years of historical data available
+    - Known population standard deviation
+    - Large daily samples
+    → Use Z-test because you know σ and have large samples
 
-The t-distribution is defined as:
+    **Scenario 2: Medical Research Study**
+    - Testing new drug effectiveness
+    - Small patient group (n=20)
+    - No known population standard deviation
+    - Need to estimate variance from sample
+    → Use T-test because of small sample size and unknown σ
 
-$t = \frac{Z}{\sqrt{V/n}}$
+    ### Mathematical Details
 
-where:
-- Z follows N(0,1)
-- V follows χ²(n) (chi-square with n degrees of freedom)
-- Z and V are independent
+    #### Heavier Tails of T-Distribution
 
-The probability density function (PDF) of t-distribution with ν degrees of freedom is:
+    The t-distribution is defined as:
 
-$f(t) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}(1 + \frac{t^2}{\nu})^{-\frac{\nu + 1}{2}}$
+    $$
+    t = \frac{Z}{\sqrt{V/n}}
+    $$
 
-Compare this to the normal distribution PDF:
+    where:
+    - Z follows N(0,1)
+    - V follows χ²(n) (chi-square with n degrees of freedom)
+    - Z and V are independent
 
-$f(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}$
+    The probability density function (PDF) of t-distribution with ν degrees of freedom is:
 
-The key difference is in the tails:
-- Normal distribution: Decays as $e^{-x^2/2}$
-- t-distribution: Decays as $x^{-(\nu+1)}$
+    $$
+    f(t) = \frac{\Gamma(\frac{\nu + 1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}(1 + \frac{t^2}{\nu})^{-\frac{\nu + 1}{2}}
+    $$
 
-For small ν, the polynomial decay of t-distribution is slower than the exponential decay of normal distribution, resulting in heavier tails.
+    Compare this to the normal distribution PDF:
+
+    $$
+    f(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
+    $$
+
+    #### Convergence to Normal Distribution
+
+    As n → ∞, we can prove convergence using:
+
+    1. The Central Limit Theorem for V/n:
+        $$
+        \frac{V/n - 1}{\sqrt{2/n}} \xrightarrow{d} N(0,1)
+        $$
+
+    2. Therefore, as n → ∞:
+        $$
+        \sqrt{V/n} \xrightarrow{p} 1
+        $$
+
+    3. Thus:
+        $$
+        t = \frac{Z}{\sqrt{V/n}} \xrightarrow{d} Z \sim N(0,1)
+        $$
+
+    #### Power Analysis
+
+    The power function for a z-test:
+    $$
+    \pi_Z(\mu) = 1 - \Phi(z_{α/2} - \frac{\mu - \mu_0}{\sigma/\sqrt{n}}) + \Phi(-z_{α/2} - \frac{\mu - \mu_0}{\sigma/\sqrt{n}})
+    $$
+
+    The power function for a t-test:
+    $$
+    \pi_T(\mu) = 1 - F_t(t_{α/2,n-1} - \frac{\mu - \mu_0}{s/\sqrt{n}}) + F_t(-t_{α/2,n-1} - \frac{\mu - \mu_0}{s/\sqrt{n}})
+    $$
+
+    where:
+    - Φ is the standard normal CDF
+    - F_t is the t-distribution CDF
+    - z_{α/2} is the normal critical value
+    - t_{α/2,n-1} is the t critical value
+
+??? "How do you handle missing data?"
+    Content for handling missing data...
+
+??? "What's the difference between correlation and causation?"
+    Content for correlation vs causation...
+
+??? "Explain the central limit theorem"
+    Content for central limit theorem...
+
+??? "How do you detect and handle outliers?"
+    Content for detecting and handling outliers...
+
+??? "What's the difference between parametric and non-parametric tests?"
+    Content for parametric vs non-parametric tests...
+
+??? "How do you choose between different types of regression?"
+    Content for choosing between different types of regression...
+
+??? "Explain cross-validation and its importance"
+    Content for cross-validation and its importance...
 
 
-2. What happens to the t-distribution as sample size increases?
-   - It approaches the normal distribution (degrees of freedom increase)
-
-### 2. Convergence to Normal Distribution
-
-As n → ∞, we can prove convergence using:
-
-1. The Central Limit Theorem for V/n:
-   $\frac{V/n - 1}{\sqrt{2/n}} \xrightarrow{d} N(0,1)$
-
-2. Therefore, as n → ∞:
-   $\sqrt{V/n} \xrightarrow{p} 1$
-
-3. Thus:
-   $t = \frac{Z}{\sqrt{V/n}} \xrightarrow{d} Z \sim N(0,1)$
-
-This convergence can be quantified:
-- For ν = 1: Cauchy distribution (undefined moments)
-- For ν = 2: No fourth moment
-- For ν = 3: No third moment
-- As ν increases: Moments exist up to order ν-1
-- As ν → ∞: All moments exist and match normal distribution
 
 
 
 
-3. Can you use a t-test when you know the population standard deviation?
-   - Yes, but it's less powerful than a z-test in this case
 
 
-### 3. Power Analysis of T-test vs Z-test
-
-The power function for a z-test:
-$\pi_Z(\mu) = 1 - \Phi(z_{α/2} - \frac{\mu - \mu_0}{\sigma/\sqrt{n}}) + \Phi(-z_{α/2} - \frac{\mu - \mu_0}{\sigma/\sqrt{n}})$
-
-The power function for a t-test:
-$\pi_T(\mu) = 1 - F_t(t_{α/2,n-1} - \frac{\mu - \mu_0}{s/\sqrt{n}}) + F_t(-t_{α/2,n-1} - \frac{\mu - \mu_0}{s/\sqrt{n}})$
-
-where:
-- Φ is the standard normal CDF
-- F_t is the t-distribution CDF
-- z_{α/2} is the normal critical value
-- t_{α/2,n-1} is the t critical value
-
-The z-test is more powerful because:
-1. |z_{α/2}| < |t_{α/2,n-1}| for any α and n
-2. Using known σ eliminates estimation uncertainty
-3. Therefore: $\pi_Z(\mu) > \pi_T(\mu)$ for any μ ≠ μ₀
-
-Quantitatively, for α = 0.05:
-- n = 10: t-test needs ~10% larger sample size for same power
-- n = 30: Difference reduces to ~3%
-- n > 100: Difference becomes negligible (<1%)
-
-
-</details>
-
-2. How do you handle missing data?
-3. What's the difference between correlation and causation?
-4. Explain the central limit theorem
-5. How do you detect and handle outliers?
-6. What's the difference between parametric and non-parametric tests?
-7. How do you choose between different types of regression?
-8. Explain cross-validation and its importance
