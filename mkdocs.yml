@@ -44,7 +44,9 @@ markdown_extensions:
   - toc:
       permalink: true
   - markdown_include.include:
-  base_path: docs
+    base_path: docs
+  - pymdownx.arithmatex:
+      generic: true
 
 extra_javascript:
   - javascripts/mathjax.js
