@@ -1,0 +1,5 @@
+- **Discrete Distributions**
+  - Bernoulli and Binomial
+  - Poisson (rare events)
+  - Geometric and Negative Binomial
+  - Hypergeometric

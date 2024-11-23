@@ -17,24 +17,6 @@
 ## [Interview Tips](./interview-tips.md)
 
 
-## 1. Descriptive Statistics
-- **Measures of Central Tendency**
-  - Mean: Arithmetic, geometric, harmonic means and their use cases
-  - Median: Robustness to outliers
-  - Mode: Use in categorical data
-  - Relationship between mean, median, mode in skewed distributions
-
-- **Measures of Dispersion**
-  - Variance and Standard Deviation
-  - Range and Interquartile Range (IQR)
-  - Coefficient of Variation
-  - Mean Absolute Deviation
-
-- **Distribution Characteristics**
-  - Skewness: Left vs right-skewed distributions
-  - Kurtosis: Heavy vs light tails
-  - Moments of a distribution
-
 ## 2. Probability Distributions
 - **Discrete Distributions**
   - Bernoulli and Binomial
