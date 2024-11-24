@@ -1,5 +1,4 @@
 # Probability Distributions
 
-{% include-markdown "statistics/3_statistical_inference/estimation.md" %}
-{% include-markdown "statistics/3_statistical_inference/hypothesis_testing.md" %}
-{% include-markdown "statistics/3_statistical_inference/sampling_theory.md" %}
+{% include-markdown "statistics/2_probability_distributions/continuous_distributions.md" %}
+{% include-markdown "statistics/2_probability_distributions/discrete_distributions.md" %}

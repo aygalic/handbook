@@ -1,5 +1,9 @@
 # Core Statistical Concepts for Data Science Interviews
 
+Statistic basic rules:
+
+
+
 ## Common Interview Questions
 
 ??? "When would you use a t-test vs z-test?"
