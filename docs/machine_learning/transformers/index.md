@@ -85,8 +85,17 @@ where μ and σ are mean and standard deviation, γ and β are learned parameter
 
 2. **Feed-Forward Network**
 ```
-FFN(x) = max(0, xW_1 + b_1)W_2 + b_2
+FFN(x) = GELU(xW_1 + b_1)W_2 + b_2
 ```
+
+where:
+
+GELU is the Gaussian Error Linear Unit activation function
+W_1 transforms from model dimension to intermediate dimension (typically 4x larger)
+W_2 transforms back to model dimension
+b_1 and b_2 are bias terms
+
+Note: While earlier transformer implementations used ReLU (max(0, x)), modern transformers typically use GELU activation functions which provide smoother gradients.
 
 3. **Residual Connection**
 ```
