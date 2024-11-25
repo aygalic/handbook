@@ -8,4 +8,4 @@ Main area of interest:
 - [Machine Learning](./machine_learning/index.md)
 - [Statistics](./statistics/index.md)
 - Probability
-- Coding practices
+- [Coding practices](./coding_practices/)
