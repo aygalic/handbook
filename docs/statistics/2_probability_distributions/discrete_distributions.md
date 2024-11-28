@@ -3,239 +3,144 @@
 ## Bernoulli and Binomial Distributions
 
 ### Bernoulli Distribution
-Models a single binary outcome (success/failure).
 
-* **Probability Mass Function (PMF)**:
-    ```
-    P(X = x) = p^x * (1-p)^(1-x), x ∈ {0,1}
-    ```
-    where:
-    - p = probability of success
-    - x = outcome (0 or 1)
+The Bernoulli distribution is the fundamental building block for many discrete distributions, modeling a single binary outcome. Think of it as a single coin flip or any yes/no experiment.
 
-* **Properties**:
-    - Mean (μ) = p
-    - Variance (σ²) = p(1-p)
-    - Only two possible outcomes
+**Mathematical Formulation:**
+Let X be a Bernoulli random variable with parameter p. Then:
 
-* **Applications**:
-    - Coin flips
-    - Yes/no questions
-    - Pass/fail outcomes
+P(X = x) = p^x * (1-p)^(1-x), x ∈ {0,1}
+
+The elegance of this formulation lies in how it captures both outcomes in a single expression:
+- When x = 1: P(X = 1) = p
+- When x = 0: P(X = 0) = 1-p
+
+**Key Properties:**
+- E[X] = p
+- Var(X) = p(1-p)
+- All higher moments can be derived from p
+- Moment Generating Function: M(t) = 1-p + pe^t
+
+For practical implementation, we can use Python's built-in random module for simple cases:
+```python
+import random
+def bernoulli_trial(p):
+    return 1 if random.random() < p else 0
+```
 
 ### Binomial Distribution
-Models the number of successes in n independent Bernoulli trials.
 
-* **PMF**:
-    ```
-    P(X = k) = C(n,k) * p^k * (1-p)^(n-k)
-    ```
-    where:
-    - n = number of trials
-    - k = number of successes
-    - p = probability of success
-    - C(n,k) = binomial coefficient
+The binomial distribution naturally extends the Bernoulli to model the sum of n independent trials. Imagine flipping a coin n times and counting the total number of heads.
 
-* **Properties**:
-    - Mean = np
-    - Variance = np(1-p)
-    - Sum of Bernoulli trials
+**Mathematical Formulation:**
+For n trials with success probability p:
 
+P(X = k) = (n choose k) * p^k * (1-p)^(n-k)
+
+where (n choose k) = n!/(k!(n-k)!)
+
+The binomial coefficient (n choose k) represents the number of ways to choose k successes from n trials, making this a beautiful combination of combinatorics and probability.
+
+**Probability Calculation Example:**
+For small values, we can compute this directly:
+```python
+from math import comb
+
+def binomial_probability(n, k, p):
+    return comb(n, k) * (p**k) * ((1-p)**(n-k))
+```
+
+For larger values where numerical stability is important, we should use specialized libraries:
 ```python
 from scipy import stats
-import numpy as np
-
-# Generate binomial data
-n_trials = 100
-p_success = 0.3
-binomial_data = stats.binom.rvs(n=n_trials, p=p_success, size=1000)
-
-# Calculate probability of exactly k successes
-k = 25
-prob_k = stats.binom.pmf(k, n_trials, p_success)
+stats.binom.pmf(k, n, p)
 ```
 
 ## Poisson Distribution
-Models the number of rare events in a fixed interval.
 
-### Properties
-* **PMF**:
-    ```
-    P(X = k) = (λ^k * e^(-λ)) / k!
-    ```
-    where:
-    - λ = average rate of events
-    - k = number of events
+The Poisson distribution models rare events occurring in a fixed interval. What makes it special is that we only need to know the average rate λ to describe the entire distribution.
 
-* **Characteristics**:
-    - Mean = λ
-    - Variance = λ
-    - Events occur independently
-    - Rate remains constant
+**Mathematical Foundation:**
+P(X = k) = (λ^k * e^(-λ)) / k!
 
-### Applications
-* Customer arrivals
-* Website traffic
-* Defects in manufacturing
-* Rare disease occurrences
+This elegant formula emerges as the limit of a binomial distribution when n → ∞ and p → 0 while np = λ remains constant. This limiting relationship provides deep insight into why the Poisson distribution appears so often in nature.
 
-```python
-# Generate Poisson data
-lambda_rate = 3
-poisson_data = stats.poisson.rvs(mu=lambda_rate, size=1000)
+**Moment Properties:**
+- E[X] = λ
+- Var(X) = λ
+- All cumulants = λ
 
-# Calculate probability of exactly k events
-k = 2
-prob_k = stats.poisson.pmf(k, lambda_rate)
-```
+This equality of mean and variance is a defining characteristic that can help identify Poisson processes in real data.
 
-## Geometric and Negative Binomial Distributions
+## Geometric and Negative Binomial
 
 ### Geometric Distribution
-Models the number of trials until first success.
 
-* **PMF**:
-    ```
-    P(X = k) = p * (1-p)^(k-1)
-    ```
-    where:
-    - p = success probability
-    - k = number of trials until success
+The geometric distribution models the waiting time until the first success in repeated trials. Its memoryless property makes it unique among discrete distributions.
 
-* **Properties**:
-    - Mean = 1/p
-    - Variance = (1-p)/p²
-    - Memoryless property
+**Mathematical Insight:**
+P(X = k) = p(1-p)^(k-1)
 
-### Negative Binomial Distribution
-Models the number of trials until r successes.
+The memoryless property means:
+P(X > m + n | X > m) = P(X > n)
 
-* **PMF**:
-    ```
-    P(X = k) = C(k-1,r-1) * p^r * (1-p)^(k-r)
-    ```
-    where:
-    - r = number of successes needed
-    - k = number of trials
-    - p = success probability
+This counterintuitive property tells us that the distribution "forgets" its past attempts.
 
-* **Properties**:
-    - Mean = r/p
-    - Variance = r(1-p)/p²
-    - Generalizes geometric distribution
+### Negative Binomial
 
-```python
-# Geometric distribution
-p_success = 0.2
-geometric_data = stats.geom.rvs(p=p_success, size=1000)
+Generalizing the geometric distribution, the negative binomial models the number of trials until r successes. 
 
-# Negative binomial
-r_successes = 3
-neg_binom_data = stats.nbinom.rvs(n=r_successes, p=p_success, size=1000)
-```
+**Mathematical Form:**
+P(X = k) = ((k-1) choose (r-1)) * p^r * (1-p)^(k-r)
+
+This can be understood as waiting for the rth success, with k-r failures along the way. The combinatorial term accounts for all possible arrangements of these failures.
 
 ## Hypergeometric Distribution
-Models sampling without replacement from a finite population.
 
-### Properties
-* **PMF**:
-    ```
-    P(X = k) = [C(K,k) * C(N-K,n-k)] / C(N,n)
-    ```
-    where:
-    - N = population size
-    - K = number of successes in population
-    - n = sample size
-    - k = number of observed successes
+Unlike the binomial, the hypergeometric distribution models sampling without replacement, making each draw dependent on previous draws.
 
-* **Characteristics**:
-    - Mean = n(K/N)
-    - Variance = n(K/N)(1-K/N)((N-n)/(N-1))
-    - Differs from binomial due to dependency
+**Mathematical Foundation:**
 
-### Applications
-* Quality control sampling
-* Election auditing
-* Card drawing problems
-* Population sampling
+P(X = k) = [C(K,k) * C(N-K,n-k)] / C(N,n)
 
-```python
-# Hypergeometric distribution
-N_population = 100  # Total population
-K_successes = 20   # Success states in population
-n_sample = 10      # Sample size
-hypergeom_data = stats.hypergeom.rvs(M=N_population, n=K_successes, 
-                                    N=n_sample, size=1000)
-```
+Where:
+- N = population size
+- K = success states in population
+- n = sample size
+- k = observed successes
 
-## Relationships and Approximations
+The denominator C(N,n) represents all possible samples, while the numerator counts favorable outcomes through a clever application of the multiplication principle.
 
-### Poisson Approximation to Binomial
+**Expected Value:**
+E[X] = n(K/N)
+
+This intuitive result shows that the expected proportion of successes in the sample equals the proportion in the population.
+
+## Distribution Relationships
+
+The relationships between these distributions reveal deep mathematical connections:
+
+1. **Binomial and Poisson:**
 When n is large and p is small:
+Binomial(n,p) ≈ Poisson(np)
+
+2. **Geometric and Negative Binomial:**
+Geometric(p) = NegativeBinomial(1,p)
+
+3. **Binomial and Hypergeometric:**
+As N → ∞, Hypergeometric(N,K,n) → Binomial(n,K/N)
+
+For computational work, these relationships often suggest efficient approximations:
 ```python
-def poisson_approx_binomial(n, p, k):
-    lambda_param = n * p
-    return stats.poisson.pmf(k, lambda_param)
+def approximate_large_binomial(n, p, k):
+    """Use Poisson approximation for large n, small p"""
+    if n > 100 and p < 0.05:
+        return stats.poisson.pmf(k, n*p)
+    return stats.binom.pmf(k, n, p)
 ```
-
-### Normal Approximation to Binomial
-When np(1-p) > 10:
-```python
-def normal_approx_binomial(n, p, k):
-    mu = n * p
-    sigma = np.sqrt(n * p * (1-p))
-    return stats.norm.cdf(k + 0.5, mu, sigma) - stats.norm.cdf(k - 0.5, mu, sigma)
-```
-
-## Implementation and Testing
-
-### Distribution Fitting
-```python
-def fit_discrete_distribution(data, distribution='poisson'):
-    """Fit discrete distribution to data"""
-    if distribution == 'poisson':
-        lambda_mle = np.mean(data)
-        return {'lambda': lambda_mle}
-    elif distribution == 'geometric':
-        p_mle = 1 / np.mean(data)
-        return {'p': p_mle}
-    # Add more distributions as needed
-```
-
-### Goodness of Fit Tests
-```python
-def test_discrete_fit(data, distribution, params):
-    """Chi-square goodness of fit test"""
-    observed = np.bincount(data)
-    if distribution == 'poisson':
-        expected = stats.poisson.pmf(np.arange(len(observed)), 
-                                   params['lambda']) * len(data)
-    # Add more distributions as needed
-    chi2_stat, p_value = stats.chisquare(observed, expected)
-    return chi2_stat, p_value
-```
-
-## Practical Guidelines
-
-### Distribution Selection
-1. **Consider the Data Generation Process**:
-   * Binary outcomes → Bernoulli/Binomial
-   * Rare events → Poisson
-   * Time until success → Geometric
-   * Sampling without replacement → Hypergeometric
-
-2. **Sample Size Considerations**:
-   * Large samples may allow normal approximations
-   * Small samples require exact distributions
-
-3. **Assumptions Checking**:
-   * Independence
-   * Constant probability/rate
-   * Population size (finite/infinite)
 
 Remember:
-1. Verify distribution assumptions
-2. Consider approximations for computational efficiency
-3. Use appropriate goodness-of-fit tests
-4. Account for real-world constraints
-5. Document distribution choice rationale
+- The choice between mathematical and computational approaches should be guided by both theoretical considerations and practical constraints
+- Understanding the mathematical foundations helps in selecting appropriate approximations
+- Modern computational tools make exact calculations feasible in many cases where approximations were historically necessary
+- The elegance of these distributions lies in their ability to model complex phenomena with simple parameters
