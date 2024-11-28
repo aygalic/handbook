@@ -1,253 +1,184 @@
 # Statistical Hypothesis Testing
 
-## Fundamentals of Hypothesis Testing
+## Fundamental Concepts
 
 ### Null and Alternative Hypotheses
 
-#### Core Concepts
-* **Null Hypothesis (H₀)**
-    - Default position of "no effect" or "no difference"
-    - Usually contains an equality (=, ≤, ≥)
-    - What we assume true until evidence suggests otherwise
+The foundation of hypothesis testing lies in formulating two competing claims about a population parameter:
 
-* **Alternative Hypothesis (H₁ or Hₐ)**
-    - Research claim we want to support
-    - Usually contains an inequality (≠, >, <)
-    - What we need evidence to support
+1. **Null Hypothesis (H₀)**: The default position, typically expressing "no effect" or "no difference"
+2. **Alternative Hypothesis (H₁ or Hₐ)**: The research claim we want to support with evidence
 
-#### Types of Alternative Hypotheses
-1. **Two-tailed**:
-    ```
-    H₀: μ = μ₀
-    H₁: μ ≠ μ₀
-    ```
+For a population parameter θ, these are typically expressed in one of three ways:
 
-2. **One-tailed (Upper)**:
-    ```
-    H₀: μ ≤ μ₀
-    H₁: μ > μ₀
-    ```
-
-3. **One-tailed (Lower)**:
-    ```
-    H₀: μ ≥ μ₀
-    H₁: μ < μ₀
-    ```
-
-### Type I and Type II Errors
-
-#### Error Types Matrix
-```python
-import pandas as pd
-
-error_matrix = pd.DataFrame({
-    'H₀ True': ['Correct Decision (1-α)', 'Type I Error (α)'],
-    'H₀ False': ['Type II Error (β)', 'Correct Decision (1-β)']
-}, index=['Fail to Reject H₀', 'Reject H₀'])
+**Two-sided test:**
+```
+H₀: θ = θ₀
+H₁: θ ≠ θ₀
 ```
 
-#### Characteristics
-* **Type I Error (α)**
-    - Rejecting H₀ when it's true
-    - "False Positive"
-    - Controlled by significance level
-    - Usually set at 0.05 or 0.01
-
-* **Type II Error (β)**
-    - Failing to reject H₀ when it's false
-    - "False Negative"
-    - Related to sample size and effect size
-    - Usually aimed to be < 0.2
-
-## P-values and Significance Levels
-
-### P-value Definition
-* Probability of observing test statistic as extreme or more extreme than observed, assuming H₀ is true
-* Smaller p-values indicate stronger evidence against H₀
-
-### Implementation
-```python
-def calculate_p_value(test_statistic, dist_type='normal', **params):
-    """
-    Calculate p-value for different distributions
-    """
-    if dist_type == 'normal':
-        return 2 * (1 - stats.norm.cdf(abs(test_statistic)))
-    elif dist_type == 't':
-        df = params.get('df', 1)
-        return 2 * (1 - stats.t.cdf(abs(test_statistic), df))
-    # Add more distributions as needed
+**One-sided tests:**
+```
+Upper-tailed:          Lower-tailed:
+H₀: θ ≤ θ₀            H₀: θ ≥ θ₀
+H₁: θ > θ₀            H₁: θ < θ₀
 ```
 
-### Significance Level (α)
-* Pre-determined threshold for rejection
-* Common values: 0.05, 0.01, 0.001
-* Decision rule: Reject H₀ if p-value < α
+### Test Statistics and Sampling Distributions
 
-## Statistical Power
+Most test statistics follow the general form:
 
-### Definition
-* Probability of correctly rejecting false H₀
-* Power = 1 - β
-* Usually aim for power ≥ 0.8
-
-### Factors Affecting Power
-1. **Sample Size**
-2. **Effect Size**
-3. **Significance Level**
-4. **Variability**
-
-### Power Analysis
-```python
-from statsmodels.stats.power import TTestPower, FTestPower
-
-def calculate_sample_size(effect_size, power=0.8, alpha=0.05):
-    """
-    Calculate required sample size for t-test
-    """
-    analysis = TTestPower()
-    sample_size = analysis.solve_power(
-        effect_size=effect_size,
-        power=power,
-        alpha=alpha
-    )
-    return np.ceil(sample_size)
-
-def calculate_power(sample_size, effect_size, alpha=0.05):
-    """
-    Calculate power for given parameters
-    """
-    analysis = TTestPower()
-    power = analysis.solve_power(
-        nobs=sample_size,
-        effect_size=effect_size,
-        alpha=alpha
-    )
-    return power
 ```
+test statistic = (sample estimate - null value) / (standard error)
+```
+
+For example, the z-test statistic for a population mean:
+
+```
+z = (x̄ - μ₀) / (σ/√n)
+```
+
+where:
+- x̄ is the sample mean
+- μ₀ is the hypothesized population mean
+- σ is the population standard deviation
+- n is the sample size
+
+When σ is unknown and estimated by s, we use the t-statistic:
+
+```
+t = (x̄ - μ₀) / (s/√n)
+```
+
+## Type I and Type II Errors
+
+The decision process in hypothesis testing can lead to two types of errors:
+
+|                    | H₀ True            | H₀ False           |
+|--------------------|-------------------|-------------------|
+| Reject H₀         | Type I Error (α)   | Correct Decision  |
+| Fail to Reject H₀ | Correct Decision   | Type II Error (β) |
+
+The probability relationships:
+```
+P(Type I Error) = α = P(Reject H₀ | H₀ true)
+P(Type II Error) = β = P(Fail to Reject H₀ | H₁ true)
+Power = 1 - β = P(Reject H₀ | H₁ true)
+```
+
+## P-values and Statistical Power
+
+### P-value
+The p-value is defined mathematically as:
+
+For a test statistic T and observed value t*:
+```
+Two-sided: p = 2 * P(T ≥ |t*| | H₀)
+Upper-tailed: p = P(T ≥ t* | H₀)
+Lower-tailed: p = P(T ≤ t* | H₀)
+```
+
+For practical computation in Python:
+```python
+def calculate_p_value(test_statistic, distribution='normal', two_sided=True):
+    if distribution == 'normal':
+        if two_sided:
+            return 2 * (1 - stats.norm.cdf(abs(test_statistic)))
+        return 1 - stats.norm.cdf(test_statistic)
+```
+
+### Statistical Power
+Power depends on four interrelated quantities:
+1. Effect size (δ)
+2. Sample size (n)
+3. Significance level (α)
+4. Power (1-β)
+
+For a two-sided z-test, the power function is:
+
+```
+Power = 1 - β = Φ(zα/2 + δ√n/σ) + Φ(-zα/2 + δ√n/σ)
+```
+
+where:
+- Φ is the standard normal CDF
+- zα/2 is the critical value
+- δ is the true difference from null
+- σ is the population standard deviation
 
 ## Multiple Testing Problem
 
-### Issue Description
-* Increased probability of Type I errors when conducting multiple tests
-* Family-wise error rate (FWER) = 1 - (1-α)ᵏ
-* Need for correction methods
+When conducting m independent tests at significance level α, the probability of at least one Type I error (Family-Wise Error Rate, FWER) is:
 
-### Correction Methods
-
-#### Bonferroni Correction
-```python
-def bonferroni_correction(p_values, alpha=0.05):
-    """
-    Apply Bonferroni correction to p-values
-    """
-    n_tests = len(p_values)
-    adjusted_alpha = alpha / n_tests
-    significant = p_values < adjusted_alpha
-    return significant, adjusted_alpha
+```
+FWER = 1 - (1-α)ᵐ
 ```
 
-#### Benjamini-Hochberg (FDR)
+### Bonferroni Correction
+Controls FWER by adjusting the significance level:
+```
+α_adjusted = α/m
+```
+
+### Benjamini-Hochberg Procedure
+Controls False Discovery Rate (FDR). For ordered p-values p₁ ≤ p₂ ≤ ... ≤ pₘ:
+1. Find largest k where p_k ≤ (k/m)α
+2. Reject all hypotheses H₍ᵢ₎ for i = 1,...,k
+
+Implementation combining mathematical insight with computation:
 ```python
 def benjamini_hochberg(p_values, alpha=0.05):
     """
-    Apply Benjamini-Hochberg correction
+    Implements Benjamini-Hochberg procedure
+    Returns: boolean array of rejected null hypotheses
     """
-    n_tests = len(p_values)
-    ranked = stats.rankdata(p_values)
-    critical_values = ranked * alpha / n_tests
+    m = len(p_values)
+    ranked = stats.rankdata(p_values, method='min')
+    critical_values = (ranked / m) * alpha
+    sorted_p_values = np.sort(p_values)
+    
+    # Find largest k where p_k ≤ (k/m)α
     significant = p_values <= critical_values
     return significant
 ```
 
-### Practical Implementation
+## Power Analysis Example
+Let's combine mathematical formulation with computation for a t-test power analysis:
 
-#### Complete Testing Framework
 ```python
-class HypothesisTest:
-    def __init__(self, alpha=0.05, power=0.8):
-        self.alpha = alpha
-        self.power = power
-        
-    def run_single_test(self, data, test_type='t_test'):
-        """
-        Run single hypothesis test
-        """
-        if test_type == 't_test':
-            stat, p_value = stats.ttest_1samp(data, 0)
-        # Add more test types
-        
-        return {
-            'statistic': stat,
-            'p_value': p_value,
-            'significant': p_value < self.alpha
-        }
+def power_analysis(effect_size, n, alpha=0.05, two_sided=True):
+    """
+    Calculate power for two-sample t-test
     
-    def run_multiple_tests(self, data_dict, correction='bonferroni'):
-        """
-        Run multiple tests with correction
-        """
-        p_values = []
-        for key, data in data_dict.items():
-            result = self.run_single_test(data)
-            p_values.append(result['p_value'])
-            
-        if correction == 'bonferroni':
-            significant, adj_alpha = bonferroni_correction(
-                np.array(p_values), self.alpha
-            )
-        elif correction == 'fdr':
-            significant = benjamini_hochberg(
-                np.array(p_values), self.alpha
-            )
-            
-        return {
-            'p_values': p_values,
-            'significant': significant
-        }
+    Parameters:
+    effect_size (d) = (μ₁ - μ₂)/σ
+    n = sample size per group
+    """
+    # Critical value
+    df = 2*n - 2  # degrees of freedom
+    if two_sided:
+        t_crit = stats.t.ppf(1 - alpha/2, df)
+    else:
+        t_crit = stats.t.ppf(1 - alpha, df)
+    
+    # Non-centrality parameter
+    ncp = effect_size * np.sqrt(n/2)
+    
+    # Power calculation
+    if two_sided:
+        power = (1 - stats.nct.cdf(t_crit, df, ncp) + 
+                stats.nct.cdf(-t_crit, df, ncp))
+    else:
+        power = 1 - stats.nct.cdf(t_crit, df, ncp)
+    
+    return power
 ```
 
-## Best Practices
-
-### Study Design
-1. **A Priori Power Analysis**
-    - Determine required sample size
-    - Consider practical significance
-    - Account for multiple testing
-
-2. **Hypothesis Formulation**
-    - Clear, specific hypotheses
-    - Appropriate test selection
-    - Consider directionality
-
-### Analysis Execution
-1. **Assumptions Checking**
-    - Normality
-    - Independence
-    - Equal variances (when applicable)
-
-2. **Documentation**
-    - Pre-registered hypotheses
-    - Chosen significance level
-    - Power calculations
-    - Multiple testing corrections
-
-### Reporting Results
-1. **Essential Elements**
-    - Test statistic
-    - Degrees of freedom
-    - Exact p-value
-    - Effect size
-    - Confidence intervals
-
-2. **Context**
-    - Practical significance
-    - Limitations
-    - Power considerations
+This balanced approach shows both the mathematical foundation and its practical implementation, helping users understand both the theory and application of hypothesis testing.
 
 Remember:
-1. Always state hypotheses clearly
-2. Consider practical significance
-3. Report effect sizes
-4. Address multiple testing when applicable
-5. Document all decisions and assumptions
+1. Start with clear mathematical formulation
+2. Provide intuitive explanations
+3. Implement solutions efficiently
+4. Consider computational aspects
+5. Document assumptions and limitations
