@@ -2,251 +2,168 @@
 
 ## Point Estimates
 
-### Fundamentals
-* **Definition**: Single value estimate of a population parameter
-* **Properties of Good Estimators**:
-    1. Unbiasedness: E[θ̂] = θ
-    2. Consistency: θ̂ → θ as n → ∞
-    3. Efficiency: Minimum variance among unbiased estimators
-    4. Sufficiency: Contains all information about θ
+A point estimate is a single value that serves as our "best guess" for an unknown population parameter. The theory behind point estimation helps us understand what makes a good estimator.
 
-### Common Point Estimators
+### Properties of Estimators
+
+#### Unbiasedness
+An estimator θ̂ is unbiased if its expected value equals the true parameter:
+
+E[θ̂] = θ
+
+For example, the sample mean X̄ is an unbiased estimator of the population mean μ:
+
+E[X̄] = E[∑Xᵢ/n] = ∑E[Xᵢ]/n = μ
+
+#### Consistency
+An estimator is consistent if it converges to the true parameter as sample size increases:
+
+lim(n→∞) P(|θ̂ₙ - θ| > ε) = 0 for any ε > 0
+
+#### Efficiency
+Among unbiased estimators, the most efficient one has the smallest variance. The Cramér-Rao bound gives us the theoretical minimum variance:
+
+Var(θ̂) ≥ 1/I(θ)
+
+where I(θ) is the Fisher Information.
+
+### Implementation of Basic Estimators
 ```python
-import numpy as np
-from scipy import stats
-
-def sample_estimators(data):
-    """
-    Calculate common point estimates
-    """
+def calculate_estimators(data):
+    """Calculate common point estimates with their standard errors"""
+    n = len(data)
+    mean = np.mean(data)
+    variance = np.var(data, ddof=1)  # Using n-1 for unbiased estimation
+    
     return {
-        'mean': np.mean(data),
-        'median': np.median(data),
-        'variance': np.var(data, ddof=1),
-        'std_dev': np.std(data, ddof=1),
-        'skewness': stats.skew(data),
-        'kurtosis': stats.kurtosis(data)
+        'mean': mean,
+        'se_mean': np.sqrt(variance/n),  # Standard error of mean
+        'variance': variance,
+        'se_variance': variance * np.sqrt(2/(n-1))  # SE of variance
     }
 ```
 
 ## Confidence Intervals
 
-### Basic Concepts
-* **Definition**: Range of values likely to contain the true parameter
-* **Interpretation**: If we repeat sampling many times, (1-α)% of intervals contain true parameter
+A confidence interval provides a range of plausible values for a parameter, along with a measure of uncertainty. The mathematical foundation comes from the sampling distribution of the estimator.
 
-### Types of Intervals
+### For Population Mean
+Under normality assumption, the pivotal quantity:
 
-#### Mean (Normal Distribution)
+(X̄ - μ)/(s/√n) ~ t(n-1)
+
+leads to the confidence interval:
+
+X̄ ± t(α/2,n-1) * s/√n
+
+where:
+- t(α/2,n-1) is the critical value from t-distribution
+- s is the sample standard deviation
+- n is the sample size
+
 ```python
-def normal_ci(data, confidence=0.95):
-    """
-    Calculate confidence interval for the mean
-    assuming normal distribution
-    """
+def mean_confidence_interval(data, confidence=0.95):
+    """Calculate CI for mean using t-distribution"""
     n = len(data)
     mean = np.mean(data)
-    sem = stats.sem(data)
-    ci = stats.t.interval(confidence, 
-                         df=n-1,
-                         loc=mean,
-                         scale=sem)
-    return {
-        'mean': mean,
-        'ci_lower': ci[0],
-        'ci_upper': ci[1]
-    }
-```
-
-#### Proportion
-```python
-def proportion_ci(successes, n, confidence=0.95):
-    """
-    Calculate confidence interval for a proportion
-    """
-    p_hat = successes / n
-    z = stats.norm.ppf((1 + confidence) / 2)
-    margin = z * np.sqrt(p_hat * (1 - p_hat) / n)
-    
-    return {
-        'proportion': p_hat,
-        'ci_lower': max(0, p_hat - margin),
-        'ci_upper': min(1, p_hat + margin)
-    }
-```
-
-#### Bootstrap Confidence Intervals
-```python
-def bootstrap_ci(data, statistic, confidence=0.95, n_boots=10000):
-    """
-    Calculate bootstrap confidence interval
-    """
-    boot_stats = []
-    for _ in range(n_boots):
-        boot_sample = np.random.choice(data, size=len(data), replace=True)
-        boot_stats.append(statistic(boot_sample))
-    
-    lower = np.percentile(boot_stats, (1 - confidence) * 100 / 2)
-    upper = np.percentile(boot_stats, (1 + confidence) * 100 / 2)
-    
-    return {
-        'statistic': statistic(data),
-        'ci_lower': lower,
-        'ci_upper': upper
-    }
+    se = stats.sem(data)
+    ci = stats.t.interval(confidence, df=n-1, loc=mean, scale=se)
+    return mean, ci
 ```
 
 ## Maximum Likelihood Estimation (MLE)
 
-### Theory
-* **Principle**: Find parameter values that maximize probability of observed data
-* **Log-Likelihood**: Usually maximize log(L) for computational convenience
-* **Properties**:
-    - Consistent
-    - Asymptotically unbiased
-    - Asymptotically efficient
+MLE finds parameter values that maximize the probability of observing the data. For independent observations, the likelihood function is:
 
-### Implementation
+L(θ; x₁, ..., xₙ) = ∏ᵢ f(xᵢ; θ)
 
-#### General MLE Framework
+We typically maximize the log-likelihood:
+
+ℓ(θ) = ∑ᵢ log f(xᵢ; θ)
+
+### Example: Normal Distribution
+For normal distribution, the log-likelihood is:
+
+ℓ(μ,σ²) = -n/2 * log(2πσ²) - ∑(xᵢ - μ)²/(2σ²)
+
+The MLEs are:
+μ̂ = X̄
+σ̂² = ∑(xᵢ - X̄)²/n
+
 ```python
-from scipy.optimize import minimize
-
-class MLEstimator:
-    def __init__(self, distribution):
-        self.distribution = distribution
-    
-    def neg_log_likelihood(self, params, data):
-        """
-        Negative log-likelihood function
-        """
-        return -np.sum(np.log(self.distribution.pdf(data, *params)))
-    
-    def fit(self, data, initial_guess):
-        """
-        Find MLE estimates
-        """
-        result = minimize(self.neg_log_likelihood,
-                        initial_guess,
-                        args=(data,),
-                        method='BFGS')
-        return result.x
-```
-
-#### Example: Normal Distribution MLE
-```python
-def normal_mle(data):
-    """
-    MLE for normal distribution parameters
-    """
+def normal_mle_with_uncertainty(data):
+    """MLE for normal distribution with standard errors"""
+    n = len(data)
     mu = np.mean(data)
-    sigma = np.sqrt(np.mean((data - mu)**2))
+    sigma2 = np.sum((data - mu)**2)/n  # MLE of variance
+    
+    # Fisher Information Matrix derivatives
+    se_mu = np.sqrt(sigma2/n)
+    se_sigma = np.sqrt(sigma2/(2*n))
+    
     return {
-        'mu': mu,
-        'sigma': sigma
+        'mu': mu, 
+        'sigma': np.sqrt(sigma2),
+        'se_mu': se_mu,
+        'se_sigma': se_sigma
     }
 ```
 
 ## Bias-Variance Tradeoff
 
-### Components
+The expected prediction error can be decomposed into:
 
-#### Bias
-* Difference between expected prediction and true value
-* Underfitting indicator
-* High bias → model too simple
+E[(y - f̂(x))²] = (Bias[f̂(x)])² + Var[f̂(x)] + σ²
 
-#### Variance
-* Variability of prediction for given input
-* Overfitting indicator
-* High variance → model too complex
+where:
+- Bias[f̂(x)] = E[f̂(x)] - f(x)
+- Var[f̂(x)] = E[(f̂(x) - E[f̂(x)])²]
+- σ² is irreducible error
 
-### Decomposition
+This decomposition helps understand the fundamental tradeoff in model complexity:
+- Simple models: High bias, low variance
+- Complex models: Low bias, high variance
+
+### Visual Demonstration
 ```python
-def bias_variance_decomp(model, X_train, X_test, y_train, y_test, n_boots=100):
-    """
-    Estimate bias and variance through bootstrap
-    """
-    predictions = np.zeros((n_boots, len(X_test)))
-    
-    for i in range(n_boots):
-        # Bootstrap sample
-        idx = np.random.choice(len(X_train), len(X_train), replace=True)
-        X_boot, y_boot = X_train[idx], y_train[idx]
-        
-        # Train model and predict
-        model.fit(X_boot, y_boot)
-        predictions[i] = model.predict(X_test)
-    
-    # Calculate components
-    expected_pred = np.mean(predictions, axis=0)
-    bias = np.mean((expected_pred - y_test)**2)
-    variance = np.mean(np.var(predictions, axis=0))
-    
-    return {
-        'bias': bias,
-        'variance': variance,
-        'total_error': bias + variance
-    }
+def plot_bias_variance_tradeoff(complexity_range, bias_values, variance_values):
+    """Plot bias-variance tradeoff across model complexities"""
+    plt.figure(figsize=(10, 6))
+    plt.plot(complexity_range, bias_values, label='Bias²')
+    plt.plot(complexity_range, variance_values, label='Variance')
+    plt.plot(complexity_range, 
+            np.array(bias_values) + np.array(variance_values), 
+            label='Total Error')
+    plt.xlabel('Model Complexity')
+    plt.ylabel('Error')
+    plt.legend()
+    plt.title('Bias-Variance Tradeoff')
+    return plt
 ```
 
-### Practical Considerations
+## Key Takeaways
 
-#### Model Complexity Control
-```python
-def complexity_analysis(model, param_range, X_train, X_test, y_train, y_test):
-    """
-    Analyze bias-variance tradeoff across model complexities
-    """
-    results = []
-    for param in param_range:
-        model.set_params(**{'complexity_param': param})
-        decomp = bias_variance_decomp(model, X_train, X_test, 
-                                    y_train, y_test)
-        results.append({
-            'complexity': param,
-            **decomp
-        })
-    return pd.DataFrame(results)
-```
+1. **Point Estimation**
+   - Balance between different estimator properties
+   - Consider both theoretical properties and practical constraints
 
-## Best Practices
+2. **Interval Estimation**
+   - Provides measure of uncertainty
+   - Based on sampling distribution theory
+   - Requires careful interpretation
 
-### Estimation Strategy
-1. **Data Quality**
-    - Check assumptions
-    - Handle missing values
-    - Address outliers
+3. **Maximum Likelihood**
+   - Powerful, general-purpose method
+   - Asymptotically optimal properties
+   - Can be computationally intensive
 
-2. **Method Selection**
-    - Consider sample size
-    - Assess distribution
-    - Evaluate computational resources
-
-3. **Validation**
-    - Cross-validation
-    - Bootstrap when appropriate
-    - Sensitivity analysis
-
-### Reporting Guidelines
-1. **Point Estimates**
-    - Always include measure of uncertainty
-    - Report relevant assumptions
-    - Include sample size
-
-2. **Confidence Intervals**
-    - State confidence level
-    - Report method used
-    - Include interpretation
-
-3. **MLE**
-    - Report convergence status
-    - Include standard errors
-    - State optimization method
+4. **Bias-Variance**
+   - Fundamental tradeoff in statistical learning
+   - Guides model complexity selection
+   - Helps understand overfitting/underfitting
 
 Remember:
-1. Choose appropriate estimation method
-2. Consider sample size implications
-3. Report uncertainty measures
-4. Validate assumptions
-5. Document methodology clearly
+- Theory guides the choice of methods
+- Practical considerations often require compromises
+- Understanding uncertainty is crucial
+- Multiple approaches often provide better insight
