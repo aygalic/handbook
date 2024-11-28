@@ -2,242 +2,154 @@
 
 ## Normal/Gaussian Distribution
 
-The normal distribution is the most widely used continuous probability distribution in statistics.
+The normal distribution is fundamental to statistics, arising naturally in many phenomena due to the Central Limit Theorem. Its mathematical elegance and theoretical properties make it the cornerstone of statistical inference.
 
-### Properties
-* Probability Density Function (PDF):
-    ```
-    f(x) = (1/√(2πσ²)) * e^(-(x-μ)²/(2σ²))
-    ```
-    where:
-    - μ = mean (location parameter)
-    - σ = standard deviation (scale parameter)
+### Mathematical Foundation
+The probability density function is given by:
 
-* Characteristics:
-    - Symmetric bell-shaped curve
-    - Mean = Median = Mode
-    - 68-95-99.7 rule:
-        - 68% of data within ±1σ
-        - 95% within ±2σ
-        - 99.7% within ±3σ
+$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
 
-### Applications
-* Natural phenomena
-* Measurement errors
-* Statistical inference
-* Central Limit Theorem applications
+where:
+- μ determines the center (location)
+- σ controls the spread (scale)
+
+The standard normal distribution (μ = 0, σ = 1) simplifies this to:
+
+$f(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$
+
+### Key Properties
+1. **Symmetry**: The distribution is perfectly symmetric around μ
+2. **Empirical Rule**:
+   - μ ± σ contains ≈ 68% of data
+   - μ ± 2σ contains ≈ 95% of data
+   - μ ± 3σ contains ≈ 99.7% of data
+
+### Implementation
+For practical applications, we can use Python:
+
+```python
+import scipy.stats as stats
+
+# Calculate probability between -1 and 1 standard deviations
+prob = stats.norm.cdf(1) - stats.norm.cdf(-1)
+print(f"Probability within 1σ: {prob:.4f}")  # ≈ 0.6827
+```
 
 ## Student's t-Distribution
 
-Developed by William Gosset under the pseudonym "Student", this distribution is crucial for small sample inference.
+The t-distribution emerges when estimating the mean of a normally distributed population when the sample size is small and the population standard deviation is unknown.
 
-### Properties
-* PDF:
-    ```
-    f(t) = [Γ((v+1)/2)/(√(vπ)Γ(v/2))] * (1 + t²/v)^(-(v+1)/2)
-    ```
-    where:
-    - v = degrees of freedom
-    - Γ = gamma function
+### Mathematical Foundation
+The probability density function is:
 
-* Characteristics:
-    - Similar to normal but heavier tails
-    - Approaches normal as v → ∞
-    - Symmetric around 0
+$f(t) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\,\Gamma(\frac{\nu}{2})} \left(1+\frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}}$
 
-### Applications
-* Small sample hypothesis testing
-* Confidence intervals for means
-* Regression analysis
+where ν represents the degrees of freedom.
+
+### Intuition
+Think of the t-distribution as a "more uncertain" normal distribution. As sample size increases (ν increases), we become more certain about our estimates, and the t-distribution approaches the normal distribution.
+
+### Critical Values
+For hypothesis testing, we often need critical values. The relationship between confidence levels and t-values depends on ν:
+
+```python
+def get_t_critical(confidence_level, df):
+    """Calculate two-tailed critical t-value"""
+    alpha = 1 - confidence_level
+    return stats.t.ppf(1 - alpha/2, df)
+```
 
 ## Chi-Square Distribution
 
-A distribution of the sum of squared standard normal variables.
+The chi-square distribution represents the sum of squared standard normal variables. It's crucial for variance-related inference and categorical data analysis.
+
+### Mathematical Foundation
+For k degrees of freedom:
+
+$f(x) = \frac{1}{2^{k/2}\Gamma(k/2)} x^{k/2-1}e^{-x/2}$
 
 ### Properties
-* PDF:
-    ```
-    f(x) = [x^(k/2-1) * e^(-x/2)] / [2^(k/2) * Γ(k/2)]
-    ```
-    where:
-    - k = degrees of freedom
-    - x ≥ 0
+Expected value: E(X) = k
+Variance: Var(X) = 2k
 
-* Characteristics:
-    - Right-skewed
-    - Non-negative
-    - Mean = k
-    - Variance = 2k
+The distribution becomes more symmetric as k increases, approaching normality.
 
-### Applications
-* Goodness-of-fit tests
-* Independence tests
-* Variance analysis
+### Application Example: Testing Variance
+To test if a sample comes from a population with a specified variance σ²₀:
+
+$\chi^2 = \frac{(n-1)s^2}{\sigma_0^2}$
+
+where s² is the sample variance.
 
 ## F-Distribution
 
-The ratio of two chi-square distributions divided by their respective degrees of freedom.
+The F-distribution represents the ratio of two chi-square distributions divided by their respective degrees of freedom. It's fundamental for comparing variances and in ANOVA.
 
-### Properties
-* PDF:
-    ```
-    f(x) = [Γ((d1+d2)/2)/(Γ(d1/2)Γ(d2/2))] * (d1/d2)^(d1/2) * x^(d1/2-1) * (1 + (d1/d2)x)^(-(d1+d2)/2)
-    ```
-    where:
-    - d1, d2 = degrees of freedom
-    - x ≥ 0
+### Mathematical Formulation
+For a ratio of chi-square variables with d₁ and d₂ degrees of freedom:
 
-* Characteristics:
-    - Right-skewed
-    - Non-negative
-    - Shape depends on both degrees of freedom
+$f(x) = \frac{\sqrt{\frac{(d_1x)^{d_1}d_2^{d_2}}{(d_1x+d_2)^{d_1+d_2}}}}{xB(d_1/2,d_2/2)}$
 
-### Applications
-* ANOVA
-* Regression analysis
-* Variance comparisons
+where B is the beta function.
+
+### ANOVA Application
+In one-way ANOVA, the F-statistic is:
+
+$F = \frac{\text{Between-group variability}}{\text{Within-group variability}} = \frac{MS_{\text{between}}}{MS_{\text{within}}}$
+
+```python
+def calculate_f_statistic(groups):
+    """Calculate F-statistic for one-way ANOVA"""
+    f_stat, p_val = stats.f_oneway(*groups)
+    return f_stat, p_val
+```
 
 ## Exponential and Gamma Distributions
 
 ### Exponential Distribution
-* PDF:
-    ```
-    f(x) = λe^(-λx)
-    ```
-    where:
-    - λ = rate parameter
-    - x ≥ 0
+Models the time between events in a Poisson process. Its memoryless property makes it unique.
 
-* Characteristics:
-    - Memoryless property
-    - Mean = 1/λ
-    - Variance = 1/λ²
+Mathematical form:
+$f(x) = \lambda e^{-\lambda x}$, x ≥ 0
 
-#### Applications
-* Time between events
-* Lifetime modeling
-* Reliability analysis
+The mean is 1/λ and variance is 1/λ².
 
 ### Gamma Distribution
-* PDF:
-    ```
-    f(x) = (λ^k * x^(k-1) * e^(-λx)) / Γ(k)
-    ```
-    where:
-    - k = shape parameter
-    - λ = rate parameter
-    - x ≥ 0
+Generalizes the exponential distribution. If X₁, ..., Xₖ are independent exponential(λ), their sum follows Gamma(k,λ).
 
-* Characteristics:
-    - Generalizes exponential distribution
-    - Mean = k/λ
-    - Variance = k/λ²
-
-#### Applications
-* Waiting time analysis
-* Rainfall modeling
-* Risk analysis
+PDF:
+$f(x) = \frac{\lambda^k x^{k-1} e^{-\lambda x}}{\Gamma(k)}$
 
 ## Beta Distribution
 
-A flexible distribution defined on the interval [0,1].
+The beta distribution is defined on [0,1], making it perfect for modeling probabilities and proportions.
 
-### Properties
-* PDF:
-    ```
-    f(x) = [x^(α-1) * (1-x)^(β-1)] / B(α,β)
-    ```
-    where:
-    - α, β = shape parameters
-    - B(α,β) = beta function
-    - 0 ≤ x ≤ 1
+### Mathematical Form
+$f(x) = \frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha,\beta)}$
 
-* Characteristics:
-    - Highly flexible shape
-    - Mean = α/(α+β)
-    - Variance = αβ/((α+β)²(α+β+1))
+### Shape Parameters
+α and β control the distribution shape:
+- α, β > 1: unimodal
+- α = β = 1: uniform
+- α < 1: J-shaped
+- β < 1: reverse J-shaped
 
-### Applications
-* Probability modeling
-* Bayesian inference
-* Quality control
-* Success rate estimation
+### Bayesian Application
+In Bayesian inference, beta serves as a conjugate prior for binomial probability:
+- Prior: Beta(α,β)
+- Data: Binomial(n,p)
+- Posterior: Beta(α+successes, β+failures)
 
-## Relationships and Transformations
-
-### Key Relationships
-1. Normal → Chi-square:
-   - Sum of squared standard normal variables
-2. Chi-square → F-distribution:
-   - Ratio of independent chi-squares
-3. Normal → Student's t:
-   - Ratio of normal to sqrt of chi-square/df
-
-### Common Transformations
 ```python
-import numpy as np
-from scipy import stats
-
-# Generate normal data
-normal_data = np.random.normal(loc=0, scale=1, size=1000)
-
-# Transform to chi-square (1 df)
-chi_square_data = normal_data**2
-
-# Create F-distribution from two chi-squares
-chi1 = np.random.chisquare(df=5, size=1000)
-chi2 = np.random.chisquare(df=10, size=1000)
-f_data = (chi1/5)/(chi2/10)
-```
-
-## Practical Considerations
-
-### Distribution Selection
-* Data characteristics
-* Theoretical justification
-* Sample size
-* Analysis objectives
-
-### Implementation Tips
-```python
-from scipy import stats
-import numpy as np
-
-# Normal distribution
-normal_data = stats.norm.rvs(loc=0, scale=1, size=1000)
-
-# Student's t
-t_data = stats.t.rvs(df=10, size=1000)
-
-# Chi-square
-chi2_data = stats.chi2.rvs(df=5, size=1000)
-
-# F-distribution
-f_data = stats.f.rvs(dfn=5, dfd=10, size=1000)
-
-# Exponential
-exp_data = stats.expon.rvs(scale=1/2, size=1000)  # λ=2
-
-# Beta
-beta_data = stats.beta.rvs(a=2, b=5, size=1000)
-```
-
-### Diagnostic Tools
-```python
-def check_distribution(data, dist_name):
-    """Basic distribution checking"""
-    # QQ plot
-    stats.probplot(data, dist=dist_name, plot=plt)
-    plt.title(f'Q-Q Plot for {dist_name}')
-    
-    # Kolmogorov-Smirnov test
-    ks_stat, p_value = stats.kstest(data, dist_name)
-    print(f'KS test p-value: {p_value}')
+def update_beta_parameters(prior_alpha, prior_beta, successes, failures):
+    """Update beta parameters with new data"""
+    post_alpha = prior_alpha + successes
+    post_beta = prior_beta + failures
+    return post_alpha, post_beta
 ```
 
 Remember:
-1. Distribution assumptions need verification
-2. Sample size affects distribution choice
-3. Transformations can help achieve desired properties
-4. Multiple tools for distribution checking
-5. Consider practical significance and context
+1. Distribution choice should be guided by data properties and theoretical considerations
+2. Many distributions are interconnected through transformations
+3. Computational tools help, but understanding the mathematical foundations is crucial
+4. Visual inspection and formal tests should complement each other in distribution analysis
