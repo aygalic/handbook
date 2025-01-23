@@ -1,6 +1,19 @@
 # Core Statistical Concepts for Data Science Interviews
 
-Statistic basic rules:
+
+In this section, we introduce the main tool for statistical analysis.
+
+- 1 - [Descriptive statistiques](./1_descriptive_statistics/index.md)
+- 2 - [Probability distributions](./2_probability_distributions/index.md)
+- 3 - [Computational rules](./3_computational_rules/index.md)
+- 4 - [Statistical inference](./4_statistical_inference/index.md)
+- 5 - [Regression_analysis](./5_regression_analysis/index.md)
+- 6 - [Experimental design](./6_experimental_design/index.md)
+- 7 - [Bayesian statistics](./7_bayesian_statistics/index.md)
+- 8 - [Advanced topics](./8_advanced_topics/index.md)
+
+
+
 
 
 
