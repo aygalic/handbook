@@ -9,9 +9,9 @@ The second part will cover everything related to my research.
 Part 1:
 
 - Linear Algebra (upcoming)
-- [Machine Learning](./grassroots/machine_learning/index.md)
-- [Statistics](./grassroots/statistics/index.md)
-- [Coding practices](./grassroots/coding_practices/index.md)
+- [Machine Learning](grassroots/machine_learning/index.md)
+- [Statistics](grassroots/statistics/index.md)
+- [Coding practices](grassroots/coding_practices/index.md)
 
  Part 2:
-- [Research](docs/research/index.md)
+- [Research](research/index.md)

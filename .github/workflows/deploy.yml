@@ -24,5 +24,6 @@ jobs:
           pip install mkdocs-material
           pip install mkdocs-include-markdown-plugin
           pip install mkdocs-print-site-plugin
+          pip install mkdocs-obsidian-links
       - name: Deploy
         run: mkdocs gh-deploy --force
