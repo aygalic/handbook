@@ -21,4 +21,29 @@ Truthfulness hallucinations happen when the model statements cannot be verified 
 
 ## Detection
 
+### Detection strategies taxonomy  
+
+- Fact checking
+	- External retrieval
+	- Internal retrieval
+- Incertitude quantification
+	- LLM's internal states
+	- LLM's behaviour 
+
+
+#### External retrieval
+https://arxiv.org/abs/2305.14251
+
+![[Pasted image 20250125220307.png]]
+#### Internal retrieval
+https://arxiv.org/abs/2309.11495
+
+#### Internal states
+https://arxiv.org/abs/2307.03987
+
+#### Behavioural approach
+https://arxiv.org/abs/2303.08896
+
+
+
 ## Benchmarks
