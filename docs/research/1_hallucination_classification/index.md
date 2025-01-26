@@ -32,9 +32,18 @@ Truthfulness hallucinations happen when the model statements cannot be verified 
 
 
 #### External retrieval
+
 https://arxiv.org/abs/2305.14251
 
+Example with **FActScore** : Atomic EvaluFine-grainedation of Factual Precision in Long Form Text Generation
+
 ![[Pasted image 20250125220307.png]]
+
+- Step 1: Model generates biographies of public figures
+- Step 2: Leverage InstructGPT to turn biographies into atomic facts
+- Step 3: Use instruct Llama to label the atomic fact (“irrelevant”, ”supported”, “not supported”) based on a retrieved (Generalizable T5-based Retrievers) knowledge base (wikipedia)
+- Step 4: Evaluate the proportion of fact that are supported
+
 #### Internal retrieval
 https://arxiv.org/abs/2309.11495
 
