@@ -62,6 +62,8 @@ Prompt the model to:
 
 #### Internal states
 
+Leveraging LLM's internal states such as the entropy of a given token or the perplexity of a sentence to infer on the hallucination state.
+
 Example of an end to end implementation :  [*A Stitch in Time Saves Nine*: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation](https://arxiv.org/abs/2307.03987)
 
 
@@ -80,8 +82,21 @@ The false positive didn't have any impact on performances.
 ![[Pasted image 20250127161356.png]]
 
 #### Behavioural approach
-https://arxiv.org/abs/2303.08896
+
+Use behavioural tools to implement fact verification approaches. This set of tools is usually used when no other technique is applicable (for instance, when the API doesn't give access to token probability).
+
+[SELFCHECKGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models](https://arxiv.org/abs/2303.08896)
 
 
+Uses multi sampling techniques.
+
+Relies on the idea that if an LLM has been trained on a concept, the sampled ideas should be similar and contain consistent facts.
+
+1. multi sampling
+2. Use LLMs to check the consistency between prompts
+3. Use the results to assert the probability of the sequence to be hallucinated
+
+![[Pasted image 20250127164920.png]]
 
 ## Benchmarks
+
