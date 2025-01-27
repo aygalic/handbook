@@ -33,9 +33,11 @@ Truthfulness hallucinations happen when the model statements cannot be verified 
 
 #### External retrieval
 
-https://arxiv.org/abs/2305.14251
+*Using an external knowledge base to compare with the model facts*
 
-Example with **FActScore** : Atomic EvaluFine-grainedation of Factual Precision in Long Form Text Generation
+
+
+Example with [**FActScore** : Atomic EvaluFine-grainedation of Factual Precision in Long Form Text Generation](https://arxiv.org/abs/2305.14251)
 
 ![[Pasted image 20250125220307.png]]
 
@@ -45,7 +47,21 @@ Example with **FActScore** : Atomic EvaluFine-grainedation of Factual Precision 
 - Step 4: Evaluate the proportion of fact that are supported
 
 #### Internal retrieval
-https://arxiv.org/abs/2309.11495
+
+*Use the model to check its own repplies*
+
+Example: **[Chain-of-Verification (CoVe)](https://arxiv.org/abs/2309.11495)**
+
+Prompt the model to:
+1. Generate a draft
+
+2. Plan verification questions (not templated)
+
+3. Answer verification questions
+
+4. Generate a final response
+
+![[Pasted image 20250127160439.png]]
 
 #### Internal states
 https://arxiv.org/abs/2307.03987
