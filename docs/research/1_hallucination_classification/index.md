@@ -54,17 +54,30 @@ Example: **[Chain-of-Verification (CoVe)](https://arxiv.org/abs/2309.11495)**
 
 Prompt the model to:
 1. Generate a draft
-
 2. Plan verification questions (not templated)
-
 3. Answer verification questions
-
 4. Generate a final response
 
 ![[Pasted image 20250127160439.png]]
 
 #### Internal states
-https://arxiv.org/abs/2307.03987
+
+Example of an end to end implementation :  [*A Stitch in Time Saves Nine*: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation](https://arxiv.org/abs/2307.03987)
+
+
+1. Generating sentense tokens
+2. Key concept identification (using AI)
+3. Uncertainty quantification (Using the lowest probability of any token in a given concept)
+4. Generating validation questions (using AI)
+5. Knowledge retrieval (external)
+6. Question answering
+7. Sentence fix
+
+Authors achieved a recall of 88% and a mitigation rate of 56%
+The false positive didn't have any impact on performances.
+
+
+![[Pasted image 20250127161356.png]]
 
 #### Behavioural approach
 https://arxiv.org/abs/2303.08896
