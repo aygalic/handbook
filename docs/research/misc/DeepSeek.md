@@ -69,12 +69,63 @@ Then you have the DeepSeekMoE architecture, with use fine(er)-grained experts an
 
 The innovation here seems to be the fact that we have some shared expert (which are all activated at every token) and routed experts, which are selected at every token by the router.
 
+These changes, when implemented together, provide a significan bump in performance, as is shown by deepseek v2 paper:
 
+![[Pasted image 20250130173714.png]]
+
+### V3 
+
+V3 takes the ideas from v2, add some new pipeline tweaks and scales the model to get new performance.
+
+- 236B to 671B parameters (21 to 37B active at every token)
+- 14.8T token for pretraining
+- 1.5M samples for fine tuning
+
+- FP8
+- Multi-token prediction training objective
+
+Impressively cheap cost:
+
+![[Pasted image 20250130174008.png]]
+
+Though this doesn't account for ablation studies, data generation cost etc.
+Also note that this table is for V3, not R1, CoT reasoning training comes at further cost.
 
 ### R1 on a potato ?
 
+No. R1 is the size of V3, ~670B parameters. But [they offer distilled version](https://ollama.com/library/deepseek-r1) on Llama and Qwen.
 
-https://ollama.com/library/deepseek-r1
+
 
 ![[Pasted image 20250129120314.png]]
 
+### R1-Zero
+
+RL Only approach which is very impressive
+![[Pasted image 20250130173029.png]]
+
+R1-zero has some kinks such as poor readability and language mixing.
+### R1
+
+Adding SFT as well as another step of RL in the pipeline to get better behaviour and performance
+
+Training is done in 4 steps:
+
+1. SFT to improve stability instead of cold start
+2. R1-Zero RL pipeline
+3. Data generation through rejection sampling -> SFT
+4. RL for Helpfulness and harmlessness
+
+R1 ends up with very solid performance:
+
+![[Pasted image 20250130173405.png]]
+
+
+And the distillations are great too:
+
+![[Pasted image 20250130173423.png]]
+
+Another impressive step is that the distillation process enable levels of performance that can't be attained on the RL pipeline of R1-zero only.
+![[Pasted image 20250130173520.png]]
+
+The R1 base model end up being 27x cheaper than contemporary o1 pricing per million token output
