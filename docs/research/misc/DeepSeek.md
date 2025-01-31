@@ -2,30 +2,58 @@
 
 # What makes DeepSeek V3 / R1 so ✨ special ✨
 
-From the V3 paper : 
+The breakthroughs are taking place over the year 2024, through the release of the V2, V3 and R1 papers.
 
-Architecture / Infra: 
+## V2
+
+The V2 papers introduce us to the architectural changes. In particular they leverage 2 powerful changes : MoE (deepSeekMoE as it is their own implementation) and Multi Head Latent Attention (MHA) (DeepSeek developed as well).
+
+Those two changes intervene on two distinct layers of the transformer block:
+- MoE takes place in the FFN
+- MHA takes place in the attention block
+
+Architecture : 
 
 ![[Pasted image 20250128161241.png]]
 
 1. Multi head latent attention
 	Low-rank joint compression for attention keys and values to reduce Key-Value (KV) cache during inference.
-	Queries are also low rank compressed ???
-1. MoE
-	Cross node MoE training - optimisation to significantly enhance training efficiency
-3. Auxiliary-loss-free strategy for load balancing
+	Queries are also cached on the v3 paper
+2. MoE
+	Cross node MoE training - optimisation to significantly enhance training efficiency.
+	Basically there are a set of **shared** experts that are active at all stages, as well as **routed** experts that can be routed on any given tokens.
+
+
+## V3 
+
+In the V3 paper, here are the new changes
+
+1. Auxiliary-loss-free strategy for load balancing
 	 Goal: minimising performance degradation due to load balancing 
 4. Multi-token prediction training objective
 	Beneficial to model performance + can be used for speculative decoding and inference acceleration
 5. FP8 mixed precision
-6. "DualPipe Algorithm" ???
+6. "DualPipe Algorithm" 
 
 
 Training process:
 
 1. Simple and **stable** pre-training on 14.8T token 
 2. (2 stages) Context extension : original -> 32K -> 128K
-3. Supervised fine tuning + Reinforcement Learning 
+3. Supervised fine tuning over 1.5M examples
+
+The paper also goes deeper into the architectural as well as pipeline changes.
+## R1-zero
+
+R1-zero is their RL only approach to CoT reasoning emergence.
+
+Basically they use a lot of complexe reasoning task that are close problems (which have one correct output such as the code compiling etc.) and they just reward the model when it produce an output between the \<think> \</think> markups, as well as the result being correct.
+
+This improved the capabilities quite impressively, reaching performance levels close to o1 
+
+## R1
+
+R1-zero 
 
 Post training:
 
@@ -36,11 +64,7 @@ Takeways: cheaper to train than a 70B param model
 On par with 400B param (or better)
 
 
-### Architecture
 
-There are two important architecture changes in the transformer block
-
-![[Pasted image 20250128161241.png]]
 
 One on the attention layer, one in the feed-forward Network.
 
