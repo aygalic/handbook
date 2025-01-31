@@ -6,7 +6,7 @@ The breakthroughs are taking place over the year 2024, through the release of th
 
 ## V2
 
-The V2 papers introduce us to the architectural changes. In particular they leverage 2 powerful changes : MoE (deepSeekMoE as it is their own implementation) and Multi Head Latent Attention (MHA) (DeepSeek developed as well).
+The [V2 paper](https://arxiv.org/abs/2405.04434) introduce the architectural changes, in particular they leverage 2 powerful changes : a house baked Mixture of Expert implementation (deepSeekMoE) and Multi Head Latent Attention (MHA) (DeepSeek developed as well).
 
 Those two changes intervene on two distinct layers of the transformer block:
 - MoE takes place in the FFN
@@ -24,50 +24,6 @@ Architecture :
 	Basically there are a set of **shared** experts that are active at all stages, as well as **routed** experts that can be routed on any given tokens.
 
 
-## V3 
-
-In the V3 paper, here are the new changes
-
-1. Auxiliary-loss-free strategy for load balancing
-	 Goal: minimising performance degradation due to load balancing 
-4. Multi-token prediction training objective
-	Beneficial to model performance + can be used for speculative decoding and inference acceleration
-5. FP8 mixed precision
-6. "DualPipe Algorithm" 
-
-
-Training process:
-
-1. Simple and **stable** pre-training on 14.8T token 
-2. (2 stages) Context extension : original -> 32K -> 128K
-3. Supervised fine tuning over 1.5M examples
-
-The paper also goes deeper into the architectural as well as pipeline changes.
-## R1-zero
-
-R1-zero is their RL only approach to CoT reasoning emergence.
-
-Basically they use a lot of complexe reasoning task that are close problems (which have one correct output such as the code compiling etc.) and they just reward the model when it produce an output between the \<think> \</think> markups, as well as the result being correct.
-
-This improved the capabilities quite impressively, reaching performance levels close to o1 
-
-## R1
-
-R1-zero 
-
-Post training:
-
-Distillation from DeepSeek R1 (chain of thought model)
-
-
-Takeways: cheaper to train than a 70B param model
-On par with 400B param (or better)
-
-
-
-
-One on the attention layer, one in the feed-forward Network.
-
 #### Multi head latent attention
 
 While Llama3 uses Grouped-querry, attention
@@ -77,13 +33,6 @@ While Llama3 uses Grouped-querry, attention
 This leads to a compressed space that caches into 5% of the original size (20x saving in memory)
 
 In the attention layer, MLHA is implemented, where they project key, values but ALSO queries (as NOT shown in the following graph).
-
-Prior work : 
-- Flash Attention - 2~4x speedup on GPT-2 
-- Flash Attention 2 - 5~9 (2 time speedup over Flash Attention)
-
-![[Pasted image 20250129110228.png]]
-
 
 #### DeepSeekMoE
 
@@ -97,16 +46,32 @@ These changes, when implemented together, provide a significan bump in performan
 
 ![[Pasted image 20250130173714.png]]
 
-### V3 
+Some insights about these graphs, Flash Attention was (is) a very big deal when it came out and had throughput benefits of 5 to 9 folds, this architecture gives us a speed boost of 5 fold with the added benefits of saving 93.3% of the KV cache on top of saving for the training cost.
 
-V3 takes the ideas from v2, add some new pipeline tweaks and scales the model to get new performance.
+Here is a graph showing the speedup of FlashAttention
 
-- 236B to 671B parameters (21 to 37B active at every token)
-- 14.8T token for pretraining
-- 1.5M samples for fine tuning
+![[Pasted image 20250129110228.png]]
 
-- FP8
-- Multi-token prediction training objective
+Some theory (TO BE CHECKED): FlashAttention is basically bypassing the old way to compute attention, a low level optimisation if you will. There have been rumours about similar practice from DeepSeek where they used PTX to rewrite some functions for optimisation.
+
+[Source](https://x.com/Jukanlosreve/status/1883304958432624881), [Source 2](https://www.tomshardware.com/tech-industry/artificial-intelligence/deepseeks-ai-breakthrough-bypasses-industry-standard-cuda-uses-assembly-like-ptx-programming-instead)
+## V3 
+
+V3 takes the ideas from v2, add some new pipeline tweaks and scales the model to get new performance. The [V3 paper](https://arxiv.org/abs/2412.19437) detail the following changes: 
+
+0. Parameter and Data Scaling:
+	236B to 671B parameters (21 to 37B active at every token)
+	14.8T token for pre-training, very stable
+	1.5M samples for fine tuning
+1. Auxiliary-loss-free strategy for load balancing
+	 Goal: minimising performance degradation due to load balancing 
+2. Multi-token prediction training objective
+	Beneficial to model performance + can be used for speculative decoding and inference acceleration
+3. FP8 mixed precision
+4. "DualPipe Algorithm" 
+5. New training process:
+	 (2 stages) Context extension : original -> 32K -> 128K
+	 Supervised fine tuning over 1.5M examples
 
 Impressively cheap cost:
 
@@ -115,21 +80,20 @@ Impressively cheap cost:
 Though this doesn't account for ablation studies, data generation cost etc.
 Also note that this table is for V3, not R1, CoT reasoning training comes at further cost.
 
-### R1 on a potato ?
+____
 
-No. R1 is the size of V3, ~670B parameters. But [they offer distilled version](https://ollama.com/library/deepseek-r1) on Llama and Qwen.
+The [R1 paper](https://arxiv.org/abs/2501.12948) develop 2 training strategies, yielding both R1-Zero and R1
+## R1-zero
 
+R1-zero is their RL only approach to CoT reasoning emergence.
 
+Basically they use a lot of complexe reasoning task that are close problems (which have one correct output such as the code compiling etc.) and they just reward the model when it produce an output between the \<think> \</think> markups, as well as the result being correct.
 
-![[Pasted image 20250129120314.png]]
-
-### R1-Zero
-
-RL Only approach which is very impressive
+This improved the capabilities quite impressively, reaching performance levels close to o1 
 ![[Pasted image 20250130173029.png]]
+## R1
 
-R1-zero has some kinks such as poor readability and language mixing.
-### R1
+R1-zero had some limitation which motivated some refinements. The authors claim the output had poor readability and the CoT reasoning suffered from language mixing.
 
 Adding SFT as well as another step of RL in the pipeline to get better behaviour and performance
 
@@ -144,12 +108,29 @@ R1 ends up with very solid performance:
 
 ![[Pasted image 20250130173405.png]]
 
+The R1 base model end up being 27x cheaper than contemporary o1 pricing per million token output
+
+### What's next ?
+
+Distillation from DeepSeek R1 (chain of thought model)
 
 And the distillations are great too:
 
 ![[Pasted image 20250130173423.png]]
 
+
+
+
 Another impressive step is that the distillation process enable levels of performance that can't be attained on the RL pipeline of R1-zero only.
 ![[Pasted image 20250130173520.png]]
 
-The R1 base model end up being 27x cheaper than contemporary o1 pricing per million token output
+##### Running R1 on a potato ?
+
+This is a common misconception that has been circulating online
+
+No. R1 is the size of V3, ~670B parameters. But [they offer distilled version](https://ollama.com/library/deepseek-r1) on Llama and Qwen.
+
+![[Pasted image 20250129120314.png]]
+
+
+
