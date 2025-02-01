@@ -33,7 +33,6 @@ While Llama3 uses Grouped-querry, attention
 This leads to a compressed space that caches into 5% of the original size (20x saving in memory)
 
 In the attention layer, MLHA is implemented, where they project key, values but ALSO queries (as NOT shown in the following graph).
-
 #### DeepSeekMoE
 
 Then you have the DeepSeekMoE architecture, with use fine(er)-grained experts and isolate/group them.
@@ -77,8 +76,16 @@ Impressively cheap cost:
 
 ![[Pasted image 20250130174008.png]]
 
+Compared to Llama 3 training, this is very impressive:
+
+![[Pasted image 20250201210443.png]]
+
+[Source](https://apxml.com/posts/training-cost-deepseek-v3-vs-llama-3) 
+
 Though this doesn't account for ablation studies, data generation cost etc.
 Also note that this table is for V3, not R1, CoT reasoning training comes at further cost.
+
+
 
 ____
 
