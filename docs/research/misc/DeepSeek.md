@@ -33,6 +33,8 @@ While Llama3 uses Grouped-querry, attention
 This leads to a compressed space that caches into 5% of the original size (20x saving in memory)
 
 In the attention layer, MLHA is implemented, where they project key, values but ALSO queries (as NOT shown in the following graph).
+
+This technique seems to be very close to [LoRA](https://arxiv.org/abs/2106.09685).
 #### DeepSeekMoE
 
 Then you have the DeepSeekMoE architecture, with use fine(er)-grained experts and isolate/group them.
