@@ -25,5 +25,6 @@ jobs:
           pip install mkdocs-include-markdown-plugin
           pip install mkdocs-print-site-plugin
           pip install mkdocs-obsidian-links
+          pip install mkdocs-bibtex
       - name: Deploy
         run: mkdocs gh-deploy --force
