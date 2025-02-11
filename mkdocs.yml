@@ -46,6 +46,7 @@ markdown_extensions:
   - toc:
       permalink: true
   - def_list
+  - footnotes
 
 plugins:
   - search
@@ -53,7 +54,9 @@ plugins:
   - print-site:
       add_to_navigation: true
   - ezlinks
-
+  - bibtex:
+      bib_file: "Library.bib"
+  
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
