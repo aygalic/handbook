@@ -45,7 +45,7 @@ Missing: SimpleQA (openAI)
 - XSum [@narayanDontGiveMe2018] University of Edinburgh, 2018: Requires the model to resonate on the document instead of simply extracting facts.
   Since it was written in 2018, it propose a CNN to work on the task associated with the Dataset.
   The dataset is composed of article from the BBC and single sentence summaries. The summary sentence is typically written by the author of the article.
-  This benchmark can be used to evaluate how well a model perform on long context comprehension. [@gaoEmpowerYourModel2023]
+  This benchmark can be used to evaluate how well a model perform on long context comprehension [@gaoEmpowerYourModel2023]. It is also used in the paper defining hallucination in a modern way [@maynezFaithfulnessFactualityAbstractive2020].
   
 - CNN/Daily Mail [@hermannTeachingMachinesRead2015] [@chenThoroughExaminationCNN2016] , Google, NeurIPS 2015, Stanford, 2016 :
   Proposing a supervised learning dataset for reading comprehension. The dataset is structured in context-query-answer triples.
