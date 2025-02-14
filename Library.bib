@@ -317,6 +317,23 @@
   file = {/Users/aygalicpro/Zotero/storage/VKYC3PYE/Hermann et al. - 2015 - Teaching Machines to Read and Comprehend.pdf}
 }
 
+@misc{hintonDistillingKnowledgeNeural2015,
+  title = {Distilling the {{Knowledge}} in a {{Neural Network}}},
+  author = {Hinton, Geoffrey and Vinyals, Oriol and Dean, Jeff},
+  year = {2015},
+  month = mar,
+  number = {arXiv:1503.02531},
+  eprint = {1503.02531},
+  primaryclass = {stat},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.1503.02531},
+  urldate = {2025-02-13},
+  abstract = {A very simple way to improve the performance of almost any machine learning algorithm is to train many different models on the same data and then to average their predictions. Unfortunately, making predictions using a whole ensemble of models is cumbersome and may be too computationally expensive to allow deployment to a large number of users, especially if the individual models are large neural nets. Caruana and his collaborators have shown that it is possible to compress the knowledge in an ensemble into a single model which is much easier to deploy and we develop this approach further using a different compression technique. We achieve some surprising results on MNIST and we show that we can significantly improve the acoustic model of a heavily used commercial system by distilling the knowledge in an ensemble of models into a single model. We also introduce a new type of ensemble composed of one or more full models and many specialist models which learn to distinguish fine-grained classes that the full models confuse. Unlike a mixture of experts, these specialist models can be trained rapidly and in parallel.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Machine Learning,Computer Science - Neural and Evolutionary Computing,Statistics - Machine Learning},
+  file = {/Users/aygalicpro/Zotero/storage/BKFJMUKC/Hinton et al. - 2015 - Distilling the Knowledge in a Neural Network.pdf;/Users/aygalicpro/Zotero/storage/9HV6V59M/1503.html}
+}
+
 @misc{hongHallucinationsLeaderboardOpen2024,
   title = {The {{Hallucinations Leaderboard}} -- {{An Open Effort}} to {{Measure Hallucinations}} in {{Large Language Models}}},
   author = {Hong, Giwon and Gema, Aryo Pradipta and Saxena, Rohit and Du, Xiaotang and Nie, Ping and Zhao, Yu and {Perez-Beltrachini}, Laura and Ryabinin, Max and He, Xuanli and Fourrier, Cl{\'e}mentine and Minervini, Pasquale},
@@ -532,6 +549,13 @@
   file = {/Users/aygalicpro/Zotero/storage/46HWUQ9R/Min et al. - 2023 - FActScore Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation.pdf}
 }
 
+@misc{ModelCompression,
+  title = {Model {{Compression}}},
+  urldate = {2025-02-13},
+  howpublished = {https://www.cs.cornell.edu/{\textasciitilde}caruana/compression.kdd06.pdf},
+  file = {/Users/aygalicpro/Zotero/storage/E5INCVXE/compression.kdd06.pdf}
+}
+
 @misc{narayanDontGiveMe2018,
   title = {Don't {{Give Me}} the {{Details}}, {{Just}} the {{Summary}}! {{Topic-Aware Convolutional Neural Networks}} for {{Extreme Summarization}}},
   author = {Narayan, Shashi and Cohen, Shay B. and Lapata, Mirella},
@@ -547,6 +571,43 @@
   archiveprefix = {arXiv},
   keywords = {Computer Science - Computation and Language},
   file = {/Users/aygalicpro/Zotero/storage/R8A2XIH4/Narayan et al. - 2018 - Don't Give Me the Details, Just the Summary! Topic-Aware Convolutional Neural Networks for Extreme S.pdf;/Users/aygalicpro/Zotero/storage/AIB6PNHE/1808.html}
+}
+
+@misc{sanhDistilBERTDistilledVersion2020,
+  title = {{{DistilBERT}}, a Distilled Version of {{BERT}}: Smaller, Faster, Cheaper and Lighter},
+  shorttitle = {{{DistilBERT}}, a Distilled Version of {{BERT}}},
+  author = {Sanh, Victor and Debut, Lysandre and Chaumond, Julien and Wolf, Thomas},
+  year = {2020},
+  month = mar,
+  number = {arXiv:1910.01108},
+  eprint = {1910.01108},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.1910.01108},
+  urldate = {2025-02-13},
+  abstract = {As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing (NLP), operating these large models in on-theedge and/or under constrained computational training or inference budgets remains challenging. In this work, we propose a method to pre-train a smaller generalpurpose language representation model, called DistilBERT, which can then be finetuned with good performances on a wide range of tasks like its larger counterparts. While most prior work investigated the use of distillation for building task-specific models, we leverage knowledge distillation during the pre-training phase and show that it is possible to reduce the size of a BERT model by 40\%, while retaining 97\% of its language understanding capabilities and being 60\% faster. To leverage the inductive biases learned by larger models during pre-training, we introduce a triple loss combining language modeling, distillation and cosine-distance losses. Our smaller, faster and lighter model is cheaper to pre-train and we demonstrate its capabilities for on-device computations in a proof-of-concept experiment and a comparative on-device study.},
+  archiveprefix = {arXiv},
+  langid = {english},
+  keywords = {Computer Science - Computation and Language},
+  file = {/Users/aygalicpro/Zotero/storage/3IA3253Z/Sanh et al. - 2020 - DistilBERT, a distilled version of BERT smaller, faster, cheaper and lighter.pdf}
+}
+
+@misc{sanhDistilBERTDistilledVersion2020a,
+  title = {{{DistilBERT}}, a Distilled Version of {{BERT}}: Smaller, Faster, Cheaper and Lighter},
+  shorttitle = {{{DistilBERT}}, a Distilled Version of {{BERT}}},
+  author = {Sanh, Victor and Debut, Lysandre and Chaumond, Julien and Wolf, Thomas},
+  year = {2020},
+  month = mar,
+  number = {arXiv:1910.01108},
+  eprint = {1910.01108},
+  primaryclass = {cs},
+  publisher = {arXiv},
+  doi = {10.48550/arXiv.1910.01108},
+  urldate = {2025-02-13},
+  abstract = {As Transfer Learning from large-scale pre-trained models becomes more prevalent in Natural Language Processing (NLP), operating these large models in on-the-edge and/or under constrained computational training or inference budgets remains challenging. In this work, we propose a method to pre-train a smaller general-purpose language representation model, called DistilBERT, which can then be fine-tuned with good performances on a wide range of tasks like its larger counterparts. While most prior work investigated the use of distillation for building task-specific models, we leverage knowledge distillation during the pre-training phase and show that it is possible to reduce the size of a BERT model by 40\%, while retaining 97\% of its language understanding capabilities and being 60\% faster. To leverage the inductive biases learned by larger models during pre-training, we introduce a triple loss combining language modeling, distillation and cosine-distance losses. Our smaller, faster and lighter model is cheaper to pre-train and we demonstrate its capabilities for on-device computations in a proof-of-concept experiment and a comparative on-device study.},
+  archiveprefix = {arXiv},
+  keywords = {Computer Science - Computation and Language},
+  file = {/Users/aygalicpro/Zotero/storage/YVD4CAV8/Sanh et al. - 2020 - DistilBERT, a distilled version of BERT smaller, faster, cheaper and lighter.pdf;/Users/aygalicpro/Zotero/storage/FA37UA3M/1910.html}
 }
 
 @inproceedings{shiTrustingYourEvidence2024,
