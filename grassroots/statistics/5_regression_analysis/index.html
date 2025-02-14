@@ -1,0 +1,3084 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://aygalic.github.io/handbook/grassroots/statistics/5_regression_analysis/">
+      
+      
+        <link rel="prev" href="../4_statistical_inference/sampling_theory/">
+      
+      
+        <link rel="next" href="generalized_linear_models/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Regression Analysis - Interview Questions Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings1.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings2.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings3.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings4.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings5.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings6.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#regression-analysis" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Interview Questions Handbook" class="md-header__button md-logo" aria-label="Interview Questions Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Questions Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Regression Analysis
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aygalic/handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aygalic/handbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Thesis handbook
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../coding_practices/" class="md-tabs__link">
+          
+  
+    
+  
+  Grassroots
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../research/" class="md-tabs__link">
+          
+  
+    
+  
+  Research
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../print_page/" class="md-tabs__link">
+        
+  
+    
+  
+  Print Site
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Interview Questions Handbook" class="md-nav__button md-logo" aria-label="Interview Questions Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Interview Questions Handbook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aygalic/handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aygalic/handbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Thesis handbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Grassroots
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Grassroots
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Coding practices
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Coding practices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/MLOps/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    MLOps
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            MLOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Machine learning
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Machine learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/1_theoretical_fundamentals/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 theoretical fundamentals
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            1 theoretical fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/2_python_fundamentals/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 python fundamentals
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            2 python fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/3_deep_learning/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 deep learning
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            3 deep learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/4_transformers/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    4 transformers
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../1_descriptive_statistics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 descriptive statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            1 descriptive statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/central_tendency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Central tendency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/dispersion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispersion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/distribution_characteristics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distribution Characteristics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/expected_value_variance_relationship/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expected Value - Variance Relationship
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../2_probability_distributions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 probability distributions
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            2 probability distributions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_probability_distributions/continuous_distributions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous Probability Distributions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_probability_distributions/discrete_distributions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Discrete Probability Distributions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../3_computational_rules/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 computational rules
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            3 computational rules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../4_statistical_inference/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    4 statistical inference
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_5" id="__nav_2_3_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 statistical inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_statistical_inference/estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistical Estimation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_statistical_inference/hypothesis_testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistical Hypothesis Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4_statistical_inference/sampling_theory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sampling Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_6" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    5 regression analysis
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_3_6" id="__nav_2_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            5 regression analysis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="generalized_linear_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generalized Linear Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="multiple_linear_regression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple Linear Regression: Mathematical Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="simple_linear_regression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple Linear Regression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../6_experimental_design/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    6 experimental design
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_7" id="__nav_2_3_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            6 experimental design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_experimental_design/a_b_testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A/B Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_experimental_design/basic_principles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Principles of Experimental Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../7_bayesian_statistics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    7 bayesian statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_8" id="__nav_2_3_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            7 bayesian statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_bayesian_statistics/applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bayesian Statistical Applications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_bayesian_statistics/fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals of Bayesian Statistics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../8_advanced_topics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    8 advanced topics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_9" id="__nav_2_3_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            8 advanced topics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_advanced_topics/dimensionality_reduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dimensionality Reduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Research
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Research
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/0_definition/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    0 definition
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            0 definition
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/1_classification/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 classification
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            1 classification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/2_detection/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 detection
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 detection
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/3_benchmarks/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 benchmarks
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            3 benchmarks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/misc/DeepSeek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    What makes DeepSeek V3 / R1 so ✨ special ✨
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Print Site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="regression-analysis">Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permanent link">&para;</a></h1>
+<h1 id="simple-linear-regression">Simple Linear Regression<a class="headerlink" href="#simple-linear-regression" title="Permanent link">&para;</a></h1>
+<h2 id="model-fundamentals">Model Fundamentals<a class="headerlink" href="#model-fundamentals" title="Permanent link">&para;</a></h2>
+<p>Linear regression models the relationship between a dependent variable y and a single independent variable x:
+<div class="highlight"><pre><span></span><code>y = β₀ + β₁x + ε
+</code></pre></div>
+where:
+- β₀ is the intercept
+- β₁ is the slope
+- ε is the error term</p>
+<h2 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">&para;</a></h2>
+<h3 id="1-linearity">1. Linearity<a class="headerlink" href="#1-linearity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Relationship between x and y is linear</li>
+<li>Can be checked through scatter plots</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_linearity</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot data and check linearity assumption</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Independent Variable&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Dependent Variable&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add lowess smoother for comparison</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.nonparametric.smoothers_lowess</span><span class="w"> </span><span class="kn">import</span> <span class="n">lowess</span>
+    <span class="n">smooth</span> <span class="o">=</span> <span class="n">lowess</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">frac</span><span class="o">=</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">smooth</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LOWESS&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="2-independence">2. Independence<a class="headerlink" href="#2-independence" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Observations are independent of each other</li>
+<li>No autocorrelation in residuals</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_independence</span><span class="p">(</span><span class="n">residuals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check independence using Durbin-Watson test</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.stattools</span><span class="w"> </span><span class="kn">import</span> <span class="n">durbin_watson</span>
+    <span class="n">dw_stat</span> <span class="o">=</span> <span class="n">durbin_watson</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;dw_statistic&#39;</span><span class="p">:</span> <span class="n">dw_stat</span><span class="p">,</span>
+        <span class="s1">&#39;is_independent&#39;</span><span class="p">:</span> <span class="mf">1.5</span> <span class="o">&lt;</span> <span class="n">dw_stat</span> <span class="o">&lt;</span> <span class="mf">2.5</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="3-homoscedasticity">3. Homoscedasticity<a class="headerlink" href="#3-homoscedasticity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Constant variance of residuals</li>
+<li>Can be checked through residual plots</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_homoscedasticity</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">residuals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot residuals vs fitted values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fitted_values</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">fitted_values</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fitted Values&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="4-normality-of-residuals">4. Normality of Residuals<a class="headerlink" href="#4-normality-of-residuals" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Residuals should be normally distributed</li>
+<li>Can be checked through QQ plots and tests</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">check_normality</span><span class="p">(</span><span class="n">residuals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check normality of residuals</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+    <span class="c1"># QQ plot</span>
+    <span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="s2">&quot;norm&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+
+    <span class="c1"># Shapiro-Wilk test</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">shapiro</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
+        <span class="s1">&#39;is_normal&#39;</span><span class="p">:</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="least-squares-estimation">Least Squares Estimation<a class="headerlink" href="#least-squares-estimation" title="Permanent link">&para;</a></h2>
+<h3 id="ordinary-least-squares-ols">Ordinary Least Squares (OLS)<a class="headerlink" href="#ordinary-least-squares-ols" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fit_ols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit simple linear regression using OLS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;intercept&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="p">,</span>
+        <span class="s1">&#39;slope&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">model</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h3 id="manual-implementation">Manual Implementation<a class="headerlink" href="#manual-implementation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">manual_ols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manual implementation of OLS</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">X_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">y_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># Calculate slope</span>
+    <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_mean</span><span class="p">))</span>
+    <span class="n">denominator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">X</span> <span class="o">-</span> <span class="n">X_mean</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">denominator</span>
+
+    <span class="c1"># Calculate intercept</span>
+    <span class="n">intercept</span> <span class="o">=</span> <span class="n">y_mean</span> <span class="o">-</span> <span class="n">slope</span> <span class="o">*</span> <span class="n">X_mean</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;intercept&#39;</span><span class="p">:</span> <span class="n">intercept</span><span class="p">,</span>
+        <span class="s1">&#39;slope&#39;</span><span class="p">:</span> <span class="n">slope</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="r-squared-and-adjusted-r-squared">R-squared and Adjusted R-squared<a class="headerlink" href="#r-squared-and-adjusted-r-squared" title="Permanent link">&para;</a></h2>
+<h3 id="r-squared">R-squared<a class="headerlink" href="#r-squared" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_r_squared</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate R-squared</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ss_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_true</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ss_residual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">r_squared</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">ss_residual</span> <span class="o">/</span> <span class="n">ss_total</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r_squared</span>
+</code></pre></div>
+<h3 id="adjusted-r-squared">Adjusted R-squared<a class="headerlink" href="#adjusted-r-squared" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_adjusted_r_squared</span><span class="p">(</span><span class="n">r_squared</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate adjusted R-squared</span>
+<span class="sd">    n: number of observations</span>
+<span class="sd">    p: number of predictors (1 for simple linear regression)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">adjusted_r_squared</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">r_squared</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">adjusted_r_squared</span>
+</code></pre></div>
+<h2 id="residual-analysis">Residual Analysis<a class="headerlink" href="#residual-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="comprehensive-residual-analysis">Comprehensive Residual Analysis<a class="headerlink" href="#comprehensive-residual-analysis" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ResidualAnalyzer</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">residuals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_residuals</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_residuals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate residuals&quot;&quot;&quot;</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">y_pred</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">standardized_residuals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate standardized residuals&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">stats</span><span class="o">.</span><span class="n">zscore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_all_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run all residual diagnostics&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;normality&#39;</span><span class="p">:</span> <span class="n">check_normality</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="p">),</span>
+            <span class="s1">&#39;independence&#39;</span><span class="p">:</span> <span class="n">check_independence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="p">),</span>
+            <span class="s1">&#39;homoscedasticity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_homoscedasticity</span><span class="p">(),</span>
+            <span class="s1">&#39;outliers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_outliers</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_outliers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check for outliers using standardized residuals&quot;&quot;&quot;</span>
+        <span class="n">std_resid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">standardized_residuals</span><span class="p">()</span>
+        <span class="n">outliers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">std_resid</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">threshold</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;n_outliers&#39;</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">outliers</span><span class="p">),</span>
+            <span class="s1">&#39;outlier_indices&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">outliers</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_homoscedasticity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Breusch-Pagan test for homoscedasticity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">statsmodels.stats.diagnostic</span><span class="w"> </span><span class="kn">import</span> <span class="n">het_breuschpagan</span>
+
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">het_breuschpagan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residuals</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">X</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;p_value&#39;</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
+            <span class="s1">&#39;is_homoscedastic&#39;</span><span class="p">:</span> <span class="n">p_value</span> <span class="o">&gt;</span> <span class="mf">0.05</span>
+        <span class="p">}</span>
+</code></pre></div>
+<h3 id="complete-regression-analysis">Complete Regression Analysis<a class="headerlink" href="#complete-regression-analysis" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">complete_regression_analysis</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform complete regression analysis</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Fit model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">fit_ols</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># Get predictions</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Calculate metrics</span>
+    <span class="n">r_squared</span> <span class="o">=</span> <span class="n">calculate_r_squared</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">adj_r_squared</span> <span class="o">=</span> <span class="n">calculate_adjusted_r_squared</span><span class="p">(</span><span class="n">r_squared</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Analyze residuals</span>
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">ResidualAnalyzer</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">residual_analysis</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">run_all_checks</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+        <span class="s1">&#39;r_squared&#39;</span><span class="p">:</span> <span class="n">r_squared</span><span class="p">,</span>
+        <span class="s1">&#39;adj_r_squared&#39;</span><span class="p">:</span> <span class="n">adj_r_squared</span><span class="p">,</span>
+        <span class="s1">&#39;residual_analysis&#39;</span><span class="p">:</span> <span class="n">residual_analysis</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="model-building-process">Model Building Process<a class="headerlink" href="#model-building-process" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Data Preparation</strong></p>
+<ul>
+<li>Check for missing values</li>
+<li>Handle outliers</li>
+<li>Scale if necessary</li>
+</ul>
+</li>
+<li>
+<p><strong>Model Fitting</strong></p>
+<ul>
+<li>Fit model using OLS</li>
+<li>Calculate confidence intervals</li>
+<li>Assess significance</li>
+</ul>
+</li>
+<li>
+<p><strong>Model Validation</strong></p>
+<ul>
+<li>Check assumptions</li>
+<li>Analyze residuals</li>
+<li>Assess fit metrics</li>
+</ul>
+</li>
+<li>
+<p><strong>Reporting</strong></p>
+<ul>
+<li>Coefficient estimates</li>
+<li>Standard errors</li>
+<li>R-squared values</li>
+<li>Assumption validations</li>
+</ul>
+</li>
+</ol>
+<p>Remember:
+1. Always check assumptions
+2. Look for influential points
+3. Consider transformations if needed
+4. Report comprehensive results
+5. Interpret findings in context</p>
+<h1 id="simple-linear-regression-mathematical-foundations">Simple Linear Regression: Mathematical Foundations<a class="headerlink" href="#simple-linear-regression-mathematical-foundations" title="Permanent link">&para;</a></h1>
+<h2 id="model-specification">Model Specification<a class="headerlink" href="#model-specification" title="Permanent link">&para;</a></h2>
+<h3 id="basic-form">Basic Form<a class="headerlink" href="#basic-form" title="Permanent link">&para;</a></h3>
+<p>The simple linear regression model is expressed as:
+<div class="highlight"><pre><span></span><code>Y = β₀ + β₁X + ε
+</code></pre></div>
+where:
+- Y is the dependent variable
+- X is the independent variable
+- β₀ is the y-intercept (value of Y when X = 0)
+- β₁ is the slope (change in Y for one unit change in X)
+- ε is the error term (random disturbance)</p>
+<h2 id="model-assumptions">Model Assumptions<a class="headerlink" href="#model-assumptions" title="Permanent link">&para;</a></h2>
+<h3 id="1-linearity_1">1. Linearity<a class="headerlink" href="#1-linearity_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mathematical Form</strong>: E[Y|X] = β₀ + β₁X</li>
+<li><strong>Interpretation</strong>: The conditional expectation of Y given X is a linear function</li>
+<li><strong>Violation Impact</strong>: Biased estimates, poor predictions</li>
+</ul>
+<h3 id="2-independence_1">2. Independence<a class="headerlink" href="#2-independence_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mathematical Form</strong>: cov(εᵢ, εⱼ) = 0 for all i ≠ j</li>
+<li><strong>Interpretation</strong>: No relationship between error terms</li>
+<li><strong>Detection</strong>: Through autocorrelation function: ρₖ = cov(εₜ, εₜ₊ₖ)/var(ε)</li>
+</ul>
+<h3 id="3-homoscedasticity_1">3. Homoscedasticity<a class="headerlink" href="#3-homoscedasticity_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mathematical Form</strong>: var(ε|X) = σ²</li>
+<li><strong>Interpretation</strong>: Constant variance of errors across all X values</li>
+<li><strong>Violation Impact</strong>: Inefficient estimates, invalid standard errors</li>
+</ul>
+<h3 id="4-normality">4. Normality<a class="headerlink" href="#4-normality" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Mathematical Form</strong>: ε ~ N(0, σ²)</li>
+<li><strong>Interpretation</strong>: Errors follow normal distribution with mean 0 and constant variance</li>
+<li><strong>Importance</strong>: Required for valid inference (t-tests, F-tests)</li>
+</ul>
+<h2 id="least-squares-estimation_1">Least Squares Estimation<a class="headerlink" href="#least-squares-estimation_1" title="Permanent link">&para;</a></h2>
+<h3 id="optimization-problem">Optimization Problem<a class="headerlink" href="#optimization-problem" title="Permanent link">&para;</a></h3>
+<p>Find β₀ and β₁ that minimize the sum of squared residuals:
+<div class="highlight"><pre><span></span><code>min Σ(Yᵢ - β₀ - β₁Xᵢ)²
+</code></pre></div></p>
+<h3 id="solutions">Solutions<a class="headerlink" href="#solutions" title="Permanent link">&para;</a></h3>
+<p>The optimal estimates are given by:
+<div class="highlight"><pre><span></span><code>β̂₁ = Σ((Xᵢ - X̄)(Yᵢ - Ȳ)) / Σ(Xᵢ - X̄)²
+β̂₀ = Ȳ - β̂₁X̄
+</code></pre></div>
+where X̄ and Ȳ are sample means</p>
+<h3 id="properties-of-ols-estimators">Properties of OLS Estimators<a class="headerlink" href="#properties-of-ols-estimators" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Unbiasedness</strong>: E[β̂] = β</li>
+<li><strong>Consistency</strong>: β̂ → β as n → ∞</li>
+<li><strong>Efficiency</strong>: Minimum variance among linear unbiased estimators (BLUE)</li>
+<li><strong>Sampling Distributions</strong>:
+   <div class="highlight"><pre><span></span><code>β̂₁ ~ N(β₁, σ²/Σ(Xᵢ - X̄)²)
+β̂₀ ~ N(β₀, σ²(1/n + X̄²/Σ(Xᵢ - X̄)²))
+</code></pre></div></li>
+</ol>
+<h2 id="measures-of-fit">Measures of Fit<a class="headerlink" href="#measures-of-fit" title="Permanent link">&para;</a></h2>
+<h3 id="r-squared_1">R-squared<a class="headerlink" href="#r-squared_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Formula</strong>: R² = 1 - SSE/SST
+  where:</li>
+<li>SSE = Σ(Yᵢ - Ŷᵢ)² (Sum of Squared Errors)</li>
+<li>
+<p>SST = Σ(Yᵢ - Ȳ)² (Total Sum of Squares)</p>
+</li>
+<li>
+<p><strong>Interpretation</strong>: Proportion of variance in Y explained by X</p>
+</li>
+<li><strong>Range</strong>: [0,1], with 1 indicating perfect fit</li>
+</ul>
+<h3 id="adjusted-r-squared_1">Adjusted R-squared<a class="headerlink" href="#adjusted-r-squared_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Formula</strong>: R̄² = 1 - (1-R²)(n-1)/(n-p-1)
+  where:</li>
+<li>n = sample size</li>
+<li>
+<p>p = number of predictors (1 for simple regression)</p>
+</li>
+<li>
+<p><strong>Interpretation</strong>: R² adjusted for model complexity</p>
+</li>
+<li><strong>Advantage</strong>: Penalizes unnecessary predictors</li>
+</ul>
+<h2 id="residual-analysis_1">Residual Analysis<a class="headerlink" href="#residual-analysis_1" title="Permanent link">&para;</a></h2>
+<h3 id="residual-definition">Residual Definition<a class="headerlink" href="#residual-definition" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>eᵢ = Yᵢ - Ŷᵢ
+</code></pre></div>
+<h3 id="standardized-residuals">Standardized Residuals<a class="headerlink" href="#standardized-residuals" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>rᵢ = eᵢ/(s√(1-hᵢᵢ))
+</code></pre></div>
+where:
+- s = standard error of regression
+- hᵢᵢ = leverage of observation i</p>
+<h3 id="key-properties">Key Properties<a class="headerlink" href="#key-properties" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Sum</strong>: Σeᵢ = 0</li>
+<li><strong>Correlation</strong>: Σ(Xᵢeᵢ) = 0</li>
+<li><strong>Distribution</strong>: Under assumptions, eᵢ/σ ~ N(0,1-hᵢᵢ)</li>
+</ol>
+<h2 id="statistical-inference">Statistical Inference<a class="headerlink" href="#statistical-inference" title="Permanent link">&para;</a></h2>
+<h3 id="standard-errors">Standard Errors<a class="headerlink" href="#standard-errors" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>SE(β̂₁) = σ/√(Σ(Xᵢ - X̄)²)
+SE(β̂₀) = σ√(1/n + X̄²/Σ(Xᵢ - X̄)²)
+</code></pre></div>
+<h3 id="hypothesis-testing">Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permanent link">&para;</a></h3>
+<p>For slope:
+<div class="highlight"><pre><span></span><code>H₀: β₁ = 0
+H₁: β₁ ≠ 0
+t = β̂₁/SE(β̂₁) ~ t(n-2)
+</code></pre></div></p>
+<h3 id="confidence-intervals">Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>β̂₁ ± t(α/2,n-2)SE(β̂₁)
+β̂₀ ± t(α/2,n-2)SE(β̂₀)
+</code></pre></div>
+<h2 id="prediction">Prediction<a class="headerlink" href="#prediction" title="Permanent link">&para;</a></h2>
+<h3 id="point-prediction">Point Prediction<a class="headerlink" href="#point-prediction" title="Permanent link">&para;</a></h3>
+<p>For new observation X₀:
+<div class="highlight"><pre><span></span><code>Ŷ₀ = β̂₀ + β̂₁X₀
+</code></pre></div></p>
+<h3 id="prediction-interval">Prediction Interval<a class="headerlink" href="#prediction-interval" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Ŷ₀ ± t(α/2,n-2)s√(1 + 1/n + (X₀-X̄)²/Σ(Xᵢ-X̄)²)
+</code></pre></div>
+<h3 id="confidence-interval-for-mean-response">Confidence Interval for Mean Response<a class="headerlink" href="#confidence-interval-for-mean-response" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>Ŷ₀ ± t(α/2,n-2)s√(1/n + (X₀-X̄)²/Σ(Xᵢ-X̄)²)
+</code></pre></div>
+<p>Remember:
+1. Assumptions are crucial for valid inference
+2. R² alone is insufficient for model assessment
+3. Residual analysis provides insight into model adequacy
+4. Prediction intervals are wider than confidence intervals
+5. Model simplicity aids interpretation</p>
+<h1 id="generalized-linear-models">Generalized Linear Models<a class="headerlink" href="#generalized-linear-models" title="Permanent link">&para;</a></h1>
+<h2 id="general-framework">General Framework<a class="headerlink" href="#general-framework" title="Permanent link">&para;</a></h2>
+<h3 id="components-of-glms">Components of GLMs<a class="headerlink" href="#components-of-glms" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Random Component</strong>: Response distribution from exponential family</li>
+<li><strong>Systematic Component</strong>: Linear predictor η = Xβ</li>
+<li><strong>Link Function</strong>: g(μ) = η, connecting mean to linear predictor</li>
+</ol>
+<h3 id="exponential-family-form">Exponential Family Form<a class="headerlink" href="#exponential-family-form" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>f(y;θ,ϕ) = exp{[yθ - b(θ)]/a(ϕ) + c(y,ϕ)}
+</code></pre></div>
+where:
+- θ is the natural parameter
+- ϕ is the dispersion parameter
+- b(θ) is the cumulant function
+- a(ϕ) is typically ϕ/w (w is a known weight)</p>
+<h2 id="logistic-regression">Logistic Regression<a class="headerlink" href="#logistic-regression" title="Permanent link">&para;</a></h2>
+<h3 id="model-specification_1">Model Specification<a class="headerlink" href="#model-specification_1" title="Permanent link">&para;</a></h3>
+<p>For binary response Y ∈ {0,1}:
+<div class="highlight"><pre><span></span><code>logit(π) = log(π/(1-π)) = β₀ + β₁x₁ + ... + βₖxₖ
+</code></pre></div>
+where π = P(Y=1|X)</p>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Response Distribution</strong>: Bernoulli/Binomial</li>
+<li><strong>Link Function</strong>: logit(π) = log(π/(1-π))</li>
+<li><strong>Mean Function</strong>: E(Y|X) = π = exp(Xβ)/(1 + exp(Xβ))</li>
+<li><strong>Variance Function</strong>: var(Y|X) = π(1-π)</li>
+</ul>
+<h3 id="interpretation">Interpretation<a class="headerlink" href="#interpretation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Odds</strong>: π/(1-π)</li>
+<li><strong>Odds Ratio</strong>: exp(βᵢ) for unit change in xᵢ</li>
+<li><strong>Probability</strong>: π = exp(Xβ)/(1 + exp(Xβ))</li>
+</ul>
+<h3 id="maximum-likelihood-estimation">Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permanent link">&para;</a></h3>
+<p>Log-likelihood:
+<div class="highlight"><pre><span></span><code>l(β) = Σ[yᵢlog(πᵢ) + (1-yᵢ)log(1-πᵢ)]
+</code></pre></div>
+Solved iteratively using Newton-Raphson or Fisher scoring</p>
+<h2 id="poisson-regression">Poisson Regression<a class="headerlink" href="#poisson-regression" title="Permanent link">&para;</a></h2>
+<h3 id="model-specification_2">Model Specification<a class="headerlink" href="#model-specification_2" title="Permanent link">&para;</a></h3>
+<p>For count response Y:
+<div class="highlight"><pre><span></span><code>log(μ) = β₀ + β₁x₁ + ... + βₖxₖ
+</code></pre></div>
+where μ = E(Y|X)</p>
+<h3 id="properties_1">Properties<a class="headerlink" href="#properties_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Response Distribution</strong>: Poisson</li>
+<li><strong>Link Function</strong>: log(μ)</li>
+<li><strong>Mean Function</strong>: E(Y|X) = μ = exp(Xβ)</li>
+<li><strong>Variance Function</strong>: var(Y|X) = μ</li>
+</ul>
+<h3 id="interpretation_1">Interpretation<a class="headerlink" href="#interpretation_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Rate Ratio</strong>: exp(βᵢ) for unit change in xᵢ</li>
+<li><strong>Expected Count</strong>: exp(Xβ)</li>
+<li><strong>Percent Change</strong>: 100(exp(βᵢ)-1)% for unit change in xᵢ</li>
+</ul>
+<h3 id="maximum-likelihood-estimation_1">Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation_1" title="Permanent link">&para;</a></h3>
+<p>Log-likelihood:
+<div class="highlight"><pre><span></span><code>l(β) = Σ[yᵢlog(μᵢ) - μᵢ - log(yᵢ!)]
+</code></pre></div></p>
+<h2 id="link-functions">Link Functions<a class="headerlink" href="#link-functions" title="Permanent link">&para;</a></h2>
+<h3 id="common-link-functions">Common Link Functions<a class="headerlink" href="#common-link-functions" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Identity</strong>: g(μ) = μ</li>
+<li>Used in linear regression</li>
+<li>
+<p>Range: (-∞, ∞)</p>
+</li>
+<li>
+<p><strong>Logit</strong>: g(μ) = log(μ/(1-μ))</p>
+</li>
+<li>Used in logistic regression</li>
+<li>
+<p>Range: [0,1]</p>
+</li>
+<li>
+<p><strong>Log</strong>: g(μ) = log(μ)</p>
+</li>
+<li>Used in Poisson regression</li>
+<li>
+<p>Range: (0, ∞)</p>
+</li>
+<li>
+<p><strong>Probit</strong>: g(μ) = Φ⁻¹(μ)</p>
+</li>
+<li>Alternative for binary data</li>
+<li>Range: [0,1]</li>
+</ol>
+<h3 id="canonical-links">Canonical Links<a class="headerlink" href="#canonical-links" title="Permanent link">&para;</a></h3>
+<p>For exponential family distributions:
+* <strong>Binomial</strong>: logit
+* <strong>Poisson</strong>: log
+* <strong>Normal</strong>: identity
+* <strong>Gamma</strong>: inverse</p>
+<h2 id="model-assessment">Model Assessment<a class="headerlink" href="#model-assessment" title="Permanent link">&para;</a></h2>
+<h3 id="deviance">Deviance<a class="headerlink" href="#deviance" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code>D = 2[l(y;y) - l(β̂;y)]
+</code></pre></div>
+where l(y;y) is log-likelihood of saturated model</p>
+<h3 id="residuals">Residuals<a class="headerlink" href="#residuals" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Pearson Residuals</strong>:
+<div class="highlight"><pre><span></span><code>rₚ = (y - μ̂)/√(V(μ̂))
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Deviance Residuals</strong>:
+<div class="highlight"><pre><span></span><code>rᵈ = sign(y - μ̂)√(d)
+</code></pre></div>
+where d is contribution to deviance</p>
+</li>
+<li>
+<p><strong>Working Residuals</strong>:
+<div class="highlight"><pre><span></span><code>rʷ = (y - μ̂)g&#39;(μ̂)
+</code></pre></div></p>
+</li>
+</ol>
+<h3 id="goodness-of-fit">Goodness of Fit<a class="headerlink" href="#goodness-of-fit" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Deviance Test</strong>:</li>
+<li>Compare deviance to χ² distribution</li>
+<li>
+<p>Degrees of freedom = n - p</p>
+</li>
+<li>
+<p><strong>Pearson χ² Test</strong>:
+<div class="highlight"><pre><span></span><code>X² = Σ(y - μ̂)²/V(μ̂)
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>AIC</strong>:
+<div class="highlight"><pre><span></span><code>AIC = -2l(β̂) + 2p
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="inference">Inference<a class="headerlink" href="#inference" title="Permanent link">&para;</a></h2>
+<h3 id="parameter-estimation">Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Standard Errors</strong>: √(diagonal of (X'WX)⁻¹)</li>
+<li><strong>Confidence Intervals</strong>: β̂ᵢ ± z₁₋α/₂SE(β̂ᵢ)</li>
+</ul>
+<h3 id="hypothesis-testing_1">Hypothesis Testing<a class="headerlink" href="#hypothesis-testing_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p><strong>Wald Test</strong>:
+<div class="highlight"><pre><span></span><code>W = β̂/SE(β̂) ~ N(0,1)
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Likelihood Ratio Test</strong>:
+<div class="highlight"><pre><span></span><code>LR = 2[l(β̂₁) - l(β̂₀)] ~ χ²(df)
+</code></pre></div></p>
+</li>
+</ul>
+<h2 id="model-selection">Model Selection<a class="headerlink" href="#model-selection" title="Permanent link">&para;</a></h2>
+<h3 id="criteria">Criteria<a class="headerlink" href="#criteria" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>AIC</strong>: -2l(β̂) + 2p</li>
+<li><strong>BIC</strong>: -2l(β̂) + p log(n)</li>
+<li><strong>Deviance</strong>: Measure of model fit</li>
+</ol>
+<h3 id="stepwise-procedures">Stepwise Procedures<a class="headerlink" href="#stepwise-procedures" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Forward Selection</strong>: Add terms sequentially</li>
+<li><strong>Backward Elimination</strong>: Remove terms sequentially</li>
+<li><strong>Stepwise</strong>: Combination of forward and backward</li>
+</ol>
+<p>Remember:
+1. Choice of link function affects interpretation
+2. Check for overdispersion in count data
+3. Assess model fit through residuals
+4. Consider theoretical justification for model choice
+5. Validate assumptions appropriate to chosen model</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy", "search.suggest"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2905 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://aygalic.github.io/handbook/grassroots/statistics/4_statistical_inference/">
+      
+      
+        <link rel="prev" href="../3_computational_rules/">
+      
+      
+        <link rel="next" href="estimation/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+    
+    
+      
+        <title>Statistical Inference - Interview Questions Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings1.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings2.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings3.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings4.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings5.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-enum-headings6.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#statistical-inference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Interview Questions Handbook" class="md-header__button md-logo" aria-label="Interview Questions Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Interview Questions Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Statistical Inference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/aygalic/handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aygalic/handbook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Thesis handbook
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../coding_practices/" class="md-tabs__link">
+          
+  
+    
+  
+  Grassroots
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../research/" class="md-tabs__link">
+          
+  
+    
+  
+  Research
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../print_page/" class="md-tabs__link">
+        
+  
+    
+  
+  Print Site
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Interview Questions Handbook" class="md-nav__button md-logo" aria-label="Interview Questions Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Interview Questions Handbook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/aygalic/handbook" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    aygalic/handbook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Thesis handbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Grassroots
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Grassroots
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Coding practices
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Coding practices
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/MLOps/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    MLOps
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            MLOps
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../coding_practices/python/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Python
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_3">
+            <span class="md-nav__icon md-icon"></span>
+            Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Machine learning
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Machine learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/1_theoretical_fundamentals/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 theoretical fundamentals
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            1 theoretical fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/2_python_fundamentals/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 python fundamentals
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            2 python fundamentals
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/3_deep_learning/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 deep learning
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            3 deep learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../machine_learning/4_transformers/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    4 transformers
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 transformers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../1_descriptive_statistics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 descriptive statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_2" id="__nav_2_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            1 descriptive statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/central_tendency/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Central tendency
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/dispersion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dispersion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/distribution_characteristics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Distribution Characteristics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_descriptive_statistics/expected_value_variance_relationship/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Expected Value - Variance Relationship
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../2_probability_distributions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 probability distributions
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_3" id="__nav_2_3_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            2 probability distributions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_probability_distributions/continuous_distributions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Continuous Probability Distributions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_probability_distributions/discrete_distributions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Discrete Probability Distributions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../3_computational_rules/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 computational rules
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            3 computational rules
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="./" class="md-nav__link md-nav__link--active">
+              
+  
+  <span class="md-ellipsis">
+    4 statistical inference
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_2_3_5" id="__nav_2_3_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            4 statistical inference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistical Estimation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="hypothesis_testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Statistical Hypothesis Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="sampling_theory/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sampling Theory
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_6" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../5_regression_analysis/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    5 regression analysis
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_6" id="__nav_2_3_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            5 regression analysis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_regression_analysis/generalized_linear_models/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generalized Linear Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_regression_analysis/multiple_linear_regression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple Linear Regression: Mathematical Foundations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_regression_analysis/simple_linear_regression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple Linear Regression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_7" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../6_experimental_design/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    6 experimental design
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_7" id="__nav_2_3_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            6 experimental design
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_experimental_design/a_b_testing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A/B Testing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_experimental_design/basic_principles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Basic Principles of Experimental Design
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_8" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../7_bayesian_statistics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    7 bayesian statistics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_8" id="__nav_2_3_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            7 bayesian statistics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_bayesian_statistics/applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bayesian Statistical Applications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7_bayesian_statistics/fundamentals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentals of Bayesian Statistics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3_9" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../8_advanced_topics/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    8 advanced topics
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3_9" id="__nav_2_3_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            8 advanced topics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8_advanced_topics/dimensionality_reduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dimensionality Reduction
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Research
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Research
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/0_definition/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    0 definition
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            0 definition
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/1_classification/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    1 classification
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            1 classification
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/2_detection/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    2 detection
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            2 detection
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../research/3_benchmarks/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    3 benchmarks
+    
+  </span>
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            3 benchmarks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Misc
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../research/misc/DeepSeek/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    What makes DeepSeek V3 / R1 so ✨ special ✨
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../print_page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Print Site
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="statistical-inference">Statistical Inference<a class="headerlink" href="#statistical-inference" title="Permanent link">&para;</a></h1>
+<h1 id="statistical-hypothesis-testing">Statistical Hypothesis Testing<a class="headerlink" href="#statistical-hypothesis-testing" title="Permanent link">&para;</a></h1>
+<h2 id="fundamental-concepts">Fundamental Concepts<a class="headerlink" href="#fundamental-concepts" title="Permanent link">&para;</a></h2>
+<h3 id="null-and-alternative-hypotheses">Null and Alternative Hypotheses<a class="headerlink" href="#null-and-alternative-hypotheses" title="Permanent link">&para;</a></h3>
+<p>The foundation of hypothesis testing lies in formulating two competing claims about a population parameter:</p>
+<ol>
+<li><strong>Null Hypothesis (H₀)</strong>: The default position, typically expressing "no effect" or "no difference"</li>
+<li><strong>Alternative Hypothesis (H₁ or Hₐ)</strong>: The research claim we want to support with evidence</li>
+</ol>
+<p>For a population parameter θ, these are typically expressed in one of three ways:</p>
+<p><strong>Two-sided test:</strong>
+<div class="highlight"><pre><span></span><code>H₀: θ = θ₀
+H₁: θ ≠ θ₀
+</code></pre></div></p>
+<p><strong>One-sided tests:</strong>
+<div class="highlight"><pre><span></span><code>Upper-tailed:          Lower-tailed:
+H₀: θ ≤ θ₀            H₀: θ ≥ θ₀
+H₁: θ &gt; θ₀            H₁: θ &lt; θ₀
+</code></pre></div></p>
+<h3 id="test-statistics-and-sampling-distributions">Test Statistics and Sampling Distributions<a class="headerlink" href="#test-statistics-and-sampling-distributions" title="Permanent link">&para;</a></h3>
+<p>Most test statistics follow the general form:</p>
+<div class="highlight"><pre><span></span><code>test statistic = (sample estimate - null value) / (standard error)
+</code></pre></div>
+<p>For example, the z-test statistic for a population mean:</p>
+<div class="highlight"><pre><span></span><code>z = (x̄ - μ₀) / (σ/√n)
+</code></pre></div>
+<p>where:
+- x̄ is the sample mean
+- μ₀ is the hypothesized population mean
+- σ is the population standard deviation
+- n is the sample size</p>
+<p>When σ is unknown and estimated by s, we use the t-statistic:</p>
+<div class="highlight"><pre><span></span><code>t = (x̄ - μ₀) / (s/√n)
+</code></pre></div>
+<h2 id="type-i-and-type-ii-errors">Type I and Type II Errors<a class="headerlink" href="#type-i-and-type-ii-errors" title="Permanent link">&para;</a></h2>
+<p>The decision process in hypothesis testing can lead to two types of errors:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>H₀ True</th>
+<th>H₀ False</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reject H₀</td>
+<td>Type I Error (α)</td>
+<td>Correct Decision</td>
+</tr>
+<tr>
+<td>Fail to Reject H₀</td>
+<td>Correct Decision</td>
+<td>Type II Error (β)</td>
+</tr>
+</tbody>
+</table>
+<p>The probability relationships:
+<div class="highlight"><pre><span></span><code>P(Type I Error) = α = P(Reject H₀ | H₀ true)
+P(Type II Error) = β = P(Fail to Reject H₀ | H₁ true)
+Power = 1 - β = P(Reject H₀ | H₁ true)
+</code></pre></div></p>
+<h2 id="p-values-and-statistical-power">P-values and Statistical Power<a class="headerlink" href="#p-values-and-statistical-power" title="Permanent link">&para;</a></h2>
+<h3 id="p-value">P-value<a class="headerlink" href="#p-value" title="Permanent link">&para;</a></h3>
+<p>The p-value is defined mathematically as:</p>
+<p>For a test statistic T and observed value t*:
+<div class="highlight"><pre><span></span><code>Two-sided: p = 2 * P(T ≥ |t*| | H₀)
+Upper-tailed: p = P(T ≥ t* | H₀)
+Lower-tailed: p = P(T ≤ t* | H₀)
+</code></pre></div></p>
+<p>For practical computation in Python:
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_p_value</span><span class="p">(</span><span class="n">test_statistic</span><span class="p">,</span> <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="n">two_sided</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">two_sided</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">test_statistic</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">test_statistic</span><span class="p">)</span>
+</code></pre></div></p>
+<h3 id="statistical-power">Statistical Power<a class="headerlink" href="#statistical-power" title="Permanent link">&para;</a></h3>
+<p>Power depends on four interrelated quantities:
+1. Effect size (δ)
+2. Sample size (n)
+3. Significance level (α)
+4. Power (1-β)</p>
+<p>For a two-sided z-test, the power function is:</p>
+<div class="highlight"><pre><span></span><code>Power = 1 - β = Φ(zα/2 + δ√n/σ) + Φ(-zα/2 + δ√n/σ)
+</code></pre></div>
+<p>where:
+- Φ is the standard normal CDF
+- zα/2 is the critical value
+- δ is the true difference from null
+- σ is the population standard deviation</p>
+<h2 id="multiple-testing-problem">Multiple Testing Problem<a class="headerlink" href="#multiple-testing-problem" title="Permanent link">&para;</a></h2>
+<p>When conducting m independent tests at significance level α, the probability of at least one Type I error (Family-Wise Error Rate, FWER) is:</p>
+<div class="highlight"><pre><span></span><code>FWER = 1 - (1-α)ᵐ
+</code></pre></div>
+<h3 id="bonferroni-correction">Bonferroni Correction<a class="headerlink" href="#bonferroni-correction" title="Permanent link">&para;</a></h3>
+<p>Controls FWER by adjusting the significance level:
+<div class="highlight"><pre><span></span><code>α_adjusted = α/m
+</code></pre></div></p>
+<h3 id="benjamini-hochberg-procedure">Benjamini-Hochberg Procedure<a class="headerlink" href="#benjamini-hochberg-procedure" title="Permanent link">&para;</a></h3>
+<p>Controls False Discovery Rate (FDR). For ordered p-values p₁ ≤ p₂ ≤ ... ≤ pₘ:
+1. Find largest k where p_k ≤ (k/m)α
+2. Reject all hypotheses H₍ᵢ₎ for i = 1,...,k</p>
+<p>Implementation combining mathematical insight with computation:
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">benjamini_hochberg</span><span class="p">(</span><span class="n">p_values</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Implements Benjamini-Hochberg procedure</span>
+<span class="sd">    Returns: boolean array of rejected null hypotheses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+    <span class="n">ranked</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">rankdata</span><span class="p">(</span><span class="n">p_values</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">)</span>
+    <span class="n">critical_values</span> <span class="o">=</span> <span class="p">(</span><span class="n">ranked</span> <span class="o">/</span> <span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">alpha</span>
+    <span class="n">sorted_p_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">p_values</span><span class="p">)</span>
+
+    <span class="c1"># Find largest k where p_k ≤ (k/m)α</span>
+    <span class="n">significant</span> <span class="o">=</span> <span class="n">p_values</span> <span class="o">&lt;=</span> <span class="n">critical_values</span>
+    <span class="k">return</span> <span class="n">significant</span>
+</code></pre></div></p>
+<h2 id="power-analysis-example">Power Analysis Example<a class="headerlink" href="#power-analysis-example" title="Permanent link">&para;</a></h2>
+<p>Let's combine mathematical formulation with computation for a t-test power analysis:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">power_analysis</span><span class="p">(</span><span class="n">effect_size</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">two_sided</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate power for two-sample t-test</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    effect_size (d) = (μ₁ - μ₂)/σ</span>
+<span class="sd">    n = sample size per group</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Critical value</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span>  <span class="c1"># degrees of freedom</span>
+    <span class="k">if</span> <span class="n">two_sided</span><span class="p">:</span>
+        <span class="n">t_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="c1"># Non-centrality parameter</span>
+    <span class="n">ncp</span> <span class="o">=</span> <span class="n">effect_size</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Power calculation</span>
+    <span class="k">if</span> <span class="n">two_sided</span><span class="p">:</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">nct</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t_crit</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">ncp</span><span class="p">)</span> <span class="o">+</span> 
+                <span class="n">stats</span><span class="o">.</span><span class="n">nct</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">t_crit</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">ncp</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">stats</span><span class="o">.</span><span class="n">nct</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">t_crit</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">ncp</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">power</span>
+</code></pre></div>
+<p>This balanced approach shows both the mathematical foundation and its practical implementation, helping users understand both the theory and application of hypothesis testing.</p>
+<p>Remember:
+1. Start with clear mathematical formulation
+2. Provide intuitive explanations
+3. Implement solutions efficiently
+4. Consider computational aspects
+5. Document assumptions and limitations</p>
+<h1 id="statistical-estimation">Statistical Estimation<a class="headerlink" href="#statistical-estimation" title="Permanent link">&para;</a></h1>
+<h2 id="point-estimates">Point Estimates<a class="headerlink" href="#point-estimates" title="Permanent link">&para;</a></h2>
+<p>A point estimate is a single value that serves as our "best guess" for an unknown population parameter. The theory behind point estimation helps us understand what makes a good estimator.</p>
+<h3 id="properties-of-estimators">Properties of Estimators<a class="headerlink" href="#properties-of-estimators" title="Permanent link">&para;</a></h3>
+<h4 id="unbiasedness">Unbiasedness<a class="headerlink" href="#unbiasedness" title="Permanent link">&para;</a></h4>
+<p>An estimator θ̂ is unbiased if its expected value equals the true parameter:</p>
+<p>E[θ̂] = θ</p>
+<p>For example, the sample mean X̄ is an unbiased estimator of the population mean μ:</p>
+<p>E[X̄] = E[∑Xᵢ/n] = ∑E[Xᵢ]/n = μ</p>
+<h4 id="consistency">Consistency<a class="headerlink" href="#consistency" title="Permanent link">&para;</a></h4>
+<p>An estimator is consistent if it converges to the true parameter as sample size increases:</p>
+<p>lim(n→∞) P(|θ̂ₙ - θ| &gt; ε) = 0 for any ε &gt; 0</p>
+<h4 id="efficiency">Efficiency<a class="headerlink" href="#efficiency" title="Permanent link">&para;</a></h4>
+<p>Among unbiased estimators, the most efficient one has the smallest variance. The Cramér-Rao bound gives us the theoretical minimum variance:</p>
+<p>Var(θ̂) ≥ 1/I(θ)</p>
+<p>where I(θ) is the Fisher Information.</p>
+<h3 id="implementation-of-basic-estimators">Implementation of Basic Estimators<a class="headerlink" href="#implementation-of-basic-estimators" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_estimators</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate common point estimates with their standard errors&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Using n-1 for unbiased estimation</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="n">mean</span><span class="p">,</span>
+        <span class="s1">&#39;se_mean&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="o">/</span><span class="n">n</span><span class="p">),</span>  <span class="c1"># Standard error of mean</span>
+        <span class="s1">&#39;variance&#39;</span><span class="p">:</span> <span class="n">variance</span><span class="p">,</span>
+        <span class="s1">&#39;se_variance&#39;</span><span class="p">:</span> <span class="n">variance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>  <span class="c1"># SE of variance</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="confidence-intervals">Confidence Intervals<a class="headerlink" href="#confidence-intervals" title="Permanent link">&para;</a></h2>
+<p>A confidence interval provides a range of plausible values for a parameter, along with a measure of uncertainty. The mathematical foundation comes from the sampling distribution of the estimator.</p>
+<h3 id="for-population-mean">For Population Mean<a class="headerlink" href="#for-population-mean" title="Permanent link">&para;</a></h3>
+<p>Under normality assumption, the pivotal quantity:</p>
+<p>(X̄ - μ)/(s/√n) ~ t(n-1)</p>
+<p>leads to the confidence interval:</p>
+<p>X̄ ± t(α/2,n-1) * s/√n</p>
+<p>where:
+- t(α/2,n-1) is the critical value from t-distribution
+- s is the sample standard deviation
+- n is the sample size</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mean_confidence_interval</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate CI for mean using t-distribution&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">se</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="n">confidence</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">se</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">ci</span>
+</code></pre></div>
+<h2 id="maximum-likelihood-estimation-mle">Maximum Likelihood Estimation (MLE)<a class="headerlink" href="#maximum-likelihood-estimation-mle" title="Permanent link">&para;</a></h2>
+<p>MLE finds parameter values that maximize the probability of observing the data. For independent observations, the likelihood function is:</p>
+<p>L(θ; x₁, ..., xₙ) = ∏ᵢ f(xᵢ; θ)</p>
+<p>We typically maximize the log-likelihood:</p>
+<p>ℓ(θ) = ∑ᵢ log f(xᵢ; θ)</p>
+<h3 id="example-normal-distribution">Example: Normal Distribution<a class="headerlink" href="#example-normal-distribution" title="Permanent link">&para;</a></h3>
+<p>For normal distribution, the log-likelihood is:</p>
+<p>ℓ(μ,σ²) = -n/2 * log(2πσ²) - ∑(xᵢ - μ)²/(2σ²)</p>
+<p>The MLEs are:
+μ̂ = X̄
+σ̂² = ∑(xᵢ - X̄)²/n</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normal_mle_with_uncertainty</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;MLE for normal distribution with standard errors&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">sigma2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">data</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">n</span>  <span class="c1"># MLE of variance</span>
+
+    <span class="c1"># Fisher Information Matrix derivatives</span>
+    <span class="n">se_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma2</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">se_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="n">mu</span><span class="p">,</span> 
+        <span class="s1">&#39;sigma&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma2</span><span class="p">),</span>
+        <span class="s1">&#39;se_mu&#39;</span><span class="p">:</span> <span class="n">se_mu</span><span class="p">,</span>
+        <span class="s1">&#39;se_sigma&#39;</span><span class="p">:</span> <span class="n">se_sigma</span>
+    <span class="p">}</span>
+</code></pre></div>
+<h2 id="bias-variance-tradeoff">Bias-Variance Tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Permanent link">&para;</a></h2>
+<p>The expected prediction error can be decomposed into:</p>
+<p>E[(y - f̂(x))²] = (Bias[f̂(x)])² + Var[f̂(x)] + σ²</p>
+<p>where:
+- Bias[f̂(x)] = E[f̂(x)] - f(x)
+- Var[f̂(x)] = E[(f̂(x) - E[f̂(x)])²]
+- σ² is irreducible error</p>
+<p>This decomposition helps understand the fundamental tradeoff in model complexity:
+- Simple models: High bias, low variance
+- Complex models: Low bias, high variance</p>
+<h3 id="visual-demonstration">Visual Demonstration<a class="headerlink" href="#visual-demonstration" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">plot_bias_variance_tradeoff</span><span class="p">(</span><span class="n">complexity_range</span><span class="p">,</span> <span class="n">bias_values</span><span class="p">,</span> <span class="n">variance_values</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Plot bias-variance tradeoff across model complexities&quot;&quot;&quot;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">complexity_range</span><span class="p">,</span> <span class="n">bias_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bias²&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">complexity_range</span><span class="p">,</span> <span class="n">variance_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Variance&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">complexity_range</span><span class="p">,</span> 
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bias_values</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">variance_values</span><span class="p">),</span> 
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total Error&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model Complexity&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bias-Variance Tradeoff&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plt</span>
+</code></pre></div>
+<h2 id="key-takeaways">Key Takeaways<a class="headerlink" href="#key-takeaways" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Point Estimation</strong></li>
+<li>Balance between different estimator properties</li>
+<li>
+<p>Consider both theoretical properties and practical constraints</p>
+</li>
+<li>
+<p><strong>Interval Estimation</strong></p>
+</li>
+<li>Provides measure of uncertainty</li>
+<li>Based on sampling distribution theory</li>
+<li>
+<p>Requires careful interpretation</p>
+</li>
+<li>
+<p><strong>Maximum Likelihood</strong></p>
+</li>
+<li>Powerful, general-purpose method</li>
+<li>Asymptotically optimal properties</li>
+<li>
+<p>Can be computationally intensive</p>
+</li>
+<li>
+<p><strong>Bias-Variance</strong></p>
+</li>
+<li>Fundamental tradeoff in statistical learning</li>
+<li>Guides model complexity selection</li>
+<li>Helps understand overfitting/underfitting</li>
+</ol>
+<p>Remember:
+- Theory guides the choice of methods
+- Practical considerations often require compromises
+- Understanding uncertainty is crucial
+- Multiple approaches often provide better insight</p>
+<h1 id="sampling-theory">Sampling Theory<a class="headerlink" href="#sampling-theory" title="Permanent link">&para;</a></h1>
+<h2 id="population-vs-sample">Population vs Sample<a class="headerlink" href="#population-vs-sample" title="Permanent link">&para;</a></h2>
+<p>The foundation of statistical inference lies in the relationship between populations and samples:</p>
+<ul>
+<li><strong>Population</strong>: The complete set of all elements we want to study</li>
+<li><strong>Sample</strong>: A subset of the population used to make inferences</li>
+</ul>
+<h3 id="mathematical-notation">Mathematical Notation<a class="headerlink" href="#mathematical-notation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Population parameters: θ, μ, σ, π</li>
+<li>Sample statistics: θ̂, x̄, s, p̂</li>
+</ul>
+<p>The relationship between population parameters and sample statistics can be expressed through expected values:
+* E[x̄] = μ (unbiased estimator of mean)
+* E[s²] = σ² (unbiased estimator of variance)</p>
+<h2 id="sampling-distributions">Sampling Distributions<a class="headerlink" href="#sampling-distributions" title="Permanent link">&para;</a></h2>
+<p>The sampling distribution describes the probability distribution of a statistic across all possible samples of size n.</p>
+<h3 id="sample-mean">Sample Mean<a class="headerlink" href="#sample-mean" title="Permanent link">&para;</a></h3>
+<p>For a random sample X₁, X₂, ..., Xₙ:
+* Sample mean: x̄ = (1/n)∑Xᵢ
+* Expected value: E[x̄] = μ
+* Variance: Var(x̄) = σ²/n</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Implementation for empirical sampling distribution</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_mean_distribution</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">):</span>
+    <span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">))</span> 
+             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">means</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="central-limit-theorem-clt">Central Limit Theorem (CLT)<a class="headerlink" href="#central-limit-theorem-clt" title="Permanent link">&para;</a></h2>
+<h3 id="mathematical-formulation">Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Permanent link">&para;</a></h3>
+<p>For independent, identically distributed random variables X₁, X₂, ..., Xₙ with mean μ and variance σ², the standardized sample mean:</p>
+<p>Z = (x̄ - μ)/(σ/√n) → N(0,1) as n → ∞</p>
+<p>This means that for large n:
+x̄ ∼ N(μ, σ²/n)</p>
+<h3 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h3>
+<p>The CLT tells us that regardless of the underlying distribution:
+1. The sampling distribution of the mean becomes approximately normal
+2. The spread of this distribution shrinks with √n
+3. The center remains at the population mean</p>
+<h2 id="law-of-large-numbers-lln">Law of Large Numbers (LLN)<a class="headerlink" href="#law-of-large-numbers-lln" title="Permanent link">&para;</a></h2>
+<h3 id="weak-law-wlln">Weak Law (WLLN)<a class="headerlink" href="#weak-law-wlln" title="Permanent link">&para;</a></h3>
+<p>For any ε &gt; 0:
+P(|x̄ₙ - μ| &gt; ε) → 0 as n → ∞</p>
+<h3 id="strong-law-slln">Strong Law (SLLN)<a class="headerlink" href="#strong-law-slln" title="Permanent link">&para;</a></h3>
+<p>P(limₙ→∞ x̄ₙ = μ) = 1</p>
+<h3 id="intuition_1">Intuition<a class="headerlink" href="#intuition_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>WLLN: The probability of a large deviation from μ becomes small</li>
+<li>SLLN: The sample mean will converge to μ with probability 1</li>
+</ul>
+<h2 id="standard-error">Standard Error<a class="headerlink" href="#standard-error" title="Permanent link">&para;</a></h2>
+<h3 id="mathematical-definition">Mathematical Definition<a class="headerlink" href="#mathematical-definition" title="Permanent link">&para;</a></h3>
+<p>For any statistic θ̂:
+SE(θ̂) = √Var(θ̂)</p>
+<h3 id="common-forms">Common Forms<a class="headerlink" href="#common-forms" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Mean</strong>: SE(x̄) = σ/√n</li>
+<li><strong>Proportion</strong>: SE(p̂) = √(p(1-p)/n)</li>
+<li><strong>Difference of Means</strong>: SE(x̄₁ - x̄₂) = √(σ₁²/n₁ + σ₂²/n₂)</li>
+</ol>
+<p>When population parameters are unknown, we use sample estimates:
+s/√n, √(p̂(1-p̂)/n), etc.</p>
+<h2 id="practical-sampling-methods">Practical Sampling Methods<a class="headerlink" href="#practical-sampling-methods" title="Permanent link">&para;</a></h2>
+<h3 id="simple-random-sampling">Simple Random Sampling<a class="headerlink" href="#simple-random-sampling" title="Permanent link">&para;</a></h3>
+<p>Each subset of size n has equal probability of selection:
+P(selecting specific sample) = 1/₍ₙᴺ₎</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">simple_random_sample</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">population</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="stratified-sampling">Stratified Sampling<a class="headerlink" href="#stratified-sampling" title="Permanent link">&para;</a></h3>
+<p>For L strata with Nₕ units in stratum h:
+* Stratum weight: Wₕ = Nₕ/N
+* Stratified mean: x̄ₛₜ = ∑Wₕx̄ₕ
+* Variance: Var(x̄ₛₜ) = ∑Wₕ²σₕ²/nₕ</p>
+<h3 id="sample-size-determination">Sample Size Determination<a class="headerlink" href="#sample-size-determination" title="Permanent link">&para;</a></h3>
+<p>For desired margin of error E and confidence level α:
+* For means: n = (zα/2 × σ/E)²
+* For proportions: n = (zα/2)² × p(1-p)/E²</p>
+<h2 id="relationship-to-statistical-inference">Relationship to Statistical Inference<a class="headerlink" href="#relationship-to-statistical-inference" title="Permanent link">&para;</a></h2>
+<p>The theoretical foundations of sampling connect directly to inference through:</p>
+<ol>
+<li>
+<p><strong>Confidence Intervals</strong>
+θ̂ ± zα/2 × SE(θ̂)</p>
+</li>
+<li>
+<p><strong>Hypothesis Tests</strong>
+Test statistic = (θ̂ - θ₀)/SE(θ̂)</p>
+</li>
+</ol>
+<p>These applications rely on the sampling distribution theory developed above.</p>
+<h3 id="example-one-sample-t-test">Example: One-Sample t-test<a class="headerlink" href="#example-one-sample-t-test" title="Permanent link">&para;</a></h3>
+<p>Under H₀: μ = μ₀
+t = (x̄ - μ₀)/(s/√n) ∼ t(n-1)</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">t_test_statistic</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">null_mean</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span> <span class="o">-</span> <span class="n">null_mean</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sample</span><span class="p">)))</span>
+</code></pre></div>
+<p>Remember:
+1. The mathematical theory provides the foundation
+2. Computational methods help verify and visualize
+3. Understanding both perspectives enhances statistical practice
+4. Real-world applications often require both theoretical and practical tools</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.indexes", "toc.follow", "content.code.copy", "search.suggest"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
